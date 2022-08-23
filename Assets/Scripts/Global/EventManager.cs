@@ -44,8 +44,6 @@ namespace PaintAstic.Global
             {
                 eventDictionary = new Dictionary<string, UnityEvent>();
             }
-
-            
         }
 
         public static void StartListening(string eventName, UnityAction listener)
