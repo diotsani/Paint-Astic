@@ -11,7 +11,7 @@ public class PlayingGrid : MonoBehaviour
     [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
     private List<Tile> gridList = new List<Tile>();
-
+    Tile[,] tiles;
     public int _amountColorOne;
     public int _amountColorTwo;
     private Color defaultColor = Color.gray;
@@ -21,20 +21,22 @@ public class PlayingGrid : MonoBehaviour
     }
     private void CreateGrid()
     {
+        tiles = new Tile[_height,_width];
         for (int x = 0; x < _height; x++)
         {
             for (int z = 0; z < _width; z++)
             {
                 Vector3 spawnPosition = new Vector3(x * _gridSpace, 0, z * _gridSpace) + gridOrigin;
-                Spawn(spawnPosition, Quaternion.identity);
+                Tile gridObjects = Instantiate(gridPrefab, spawnPosition, Quaternion.identity, transform);
+                tiles[x, z] = gridObjects;
+                gridObjects.DefaultColors();
+                gridList.Add(gridObjects);
             }
         }
     }
-    void Spawn(Vector3 positionToSpawn, Quaternion rotationToSpawn)
+    void GetTilePosition()
     {
-        Tile gridObjects = Instantiate(gridPrefab, positionToSpawn, rotationToSpawn, transform);
-        gridObjects.GetComponent<Tile>().DefaultColors();
-        gridList.Add(gridObjects);
+
     }
     public void OnHitPlayerOne(GameObject obj) // Need Event On Trigger in Script Player
     {
