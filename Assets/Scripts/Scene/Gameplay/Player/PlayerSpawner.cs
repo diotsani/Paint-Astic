@@ -28,6 +28,7 @@ namespace PaintAstic.Module.Player
             SpawnPlayer();
         }
 
+
         void MovePlayer(object data)
         {
             MoveMessage moveMessage = (MoveMessage)data;
