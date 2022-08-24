@@ -5,16 +5,20 @@ using PaintAstic.Global;
 
 public class PlayingGrid : MonoBehaviour
 {
-    int _height = 8;
-    int _width = 8;
+    private int _height = 8;
+    private int _width = 8;
     private float _gridSpace = 1f;
-    [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
+
+    [SerializeField] private Tile gridPrefab;
     private List<Tile> gridList = new List<Tile>();
     Tile[,] tiles;
-    public int _amountColorOne;
-    public int _amountColorTwo;
+
+    //Useless
+    private int _amountColorOne;
+    private int _amountColorTwo;
     private Color defaultColor = Color.gray;
+
     private void Awake()
     {
         CreateGrid();
@@ -33,10 +37,6 @@ public class PlayingGrid : MonoBehaviour
                 gridList.Add(gridObjects);
             }
         }
-    }
-    void GetTilePosition()
-    {
-
     }
     public void OnHitPlayerOne(GameObject obj) // Need Event On Trigger in Script Player
     {

@@ -23,7 +23,7 @@ public class Tile : MonoBehaviour
         gameObject.GetComponent<Renderer>().material.color = defaultColor;
     }
 
-    private void ChangeColors(object indexPlayer)
+    public void ChangeColors(object indexPlayer)
     {
         int colorIndex = (int)indexPlayer;
         gameObject.GetComponent<Renderer>().material.color = playerColor[colorIndex];
