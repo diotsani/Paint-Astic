@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace PaintAstic.Global.ConfigData
+namespace PaintAstic.Global.Config
 {
     public class ConfigData : MonoBehaviour
     {
-        private bool isBgmOn;
-        private bool isSfxOn;
+        public bool isBgmOn { get; private set; }
+        public bool isSfxOn { get; private set; }
         private UnityAction onSwitchBgmValue;
         private UnityAction onSwitchSfxValue;
 
