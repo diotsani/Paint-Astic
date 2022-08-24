@@ -1,33 +1,40 @@
 using PaintAstic.Global;
+using PaintAstic.Module.Player;
 using UnityEngine;
 
 namespace PaintAstic.Module.Inputs
 {
     public class InputManager : MonoBehaviour
     {
-        [SerializeField] private KeyCode _moveUp;
-        [SerializeField] private KeyCode _moveDown;
-        [SerializeField] private KeyCode _moveLeft;
-        [SerializeField] private KeyCode _moveRight;
+        [SerializeField] private InputConfig[] inputConfigs;
+        private MoveMessage moveMessage;
 
         void Update()
         {
-            if (Input.GetKeyDown(_moveUp))
+            for (int i = 0; i < inputConfigs.Length; i++)
             {
-                EventManager.TriggerEvent("Move", Vector3.forward);
+                var inputConfig = inputConfigs[i];
+
+                if (Input.GetKey(inputConfig.moveUp))
+                {
+                    moveMessage = new MoveMessage(Vector3.forward, i);
+                    
+                    EventManager.TriggerEvent("Move", moveMessage);
+                }
+                if (Input.GetKey(inputConfig.moveDown))
+                {
+                    EventManager.TriggerEvent("Move", Vector3.back);
+                }
+                if (Input.GetKey(inputConfig.moveLeft))
+                {
+                    EventManager.TriggerEvent("Move", Vector3.left);
+                }
+                if (Input.GetKey(inputConfig.moveRight))
+                {
+                    EventManager.TriggerEvent("Move", Vector3.right);
+                }
             }
-            if (Input.GetKeyDown(_moveDown))
-            {
-                EventManager.TriggerEvent("Move", Vector3.back);
-            }
-            if (Input.GetKeyDown(_moveLeft))
-            {
-                EventManager.TriggerEvent("Move", Vector3.left);
-            }
-            if (Input.GetKeyDown(_moveRight))
-            {
-                EventManager.TriggerEvent("Move", Vector3.right);
-            }
+            
         }
     }
 }
