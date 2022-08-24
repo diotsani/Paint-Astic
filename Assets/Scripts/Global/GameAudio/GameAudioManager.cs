@@ -31,14 +31,14 @@ namespace PaintAstic.Global.GameAudio
 
         private void OnEnable()
         {
-            EventManager.StartListening("CollectPointMessage", _onCollectPoint);
+            EventManager.StartListening("CollectedMessage", _onCollectPoint);
             EventManager.StartListening("BombMessage", _onBomb);
             EventManager.StartListening("ConvertTilesMessage", _onPlayerMove);
         }
 
         private void OnDisable()
         {
-            EventManager.StopListening("CollectPointMessage", _onCollectPoint);
+            EventManager.StopListening("CollectedMessage", _onCollectPoint);
             EventManager.StopListening("BombMessage", _onBomb);
             EventManager.StopListening("ConvertTilesMessage", _onPlayerMove);
         }
