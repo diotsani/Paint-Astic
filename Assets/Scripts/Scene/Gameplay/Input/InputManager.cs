@@ -6,32 +6,29 @@ namespace PaintAstic.Module.Inputs
 {
     public class InputManager : MonoBehaviour
     {
-        [SerializeField] private InputConfig[] inputConfigs;
-        private MoveMessage moveMessage;
+        [SerializeField] private InputConfig[] _inputConfigs;
 
-        void Update()
+        void FixedUpdate()
         {
-            for (int i = 0; i < inputConfigs.Length; i++)
+            for (int i = 0; i < _inputConfigs.Length; i++)
             {
-                var inputConfig = inputConfigs[i];
+                var inputConfig = _inputConfigs[i];
 
-                if (Input.GetKey(inputConfig.moveUp))
+                if (Input.GetKeyDown(inputConfig.moveUp))
                 {
-                    moveMessage = new MoveMessage(Vector3.forward, i);
-                    
-                    EventManager.TriggerEvent("Move", moveMessage);
+                    EventManager.TriggerEvent("Move",new MoveMessage(Vector3.forward, i));
                 }
-                if (Input.GetKey(inputConfig.moveDown))
+                if (Input.GetKeyDown(inputConfig.moveDown))
                 {
-                    EventManager.TriggerEvent("Move", Vector3.back);
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.back, i));
                 }
-                if (Input.GetKey(inputConfig.moveLeft))
+                if (Input.GetKeyDown(inputConfig.moveLeft))
                 {
-                    EventManager.TriggerEvent("Move", Vector3.left);
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.left, i));
                 }
-                if (Input.GetKey(inputConfig.moveRight))
+                if (Input.GetKeyDown(inputConfig.moveRight))
                 {
-                    EventManager.TriggerEvent("Move", Vector3.right);
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.right, i));
                 }
             }
             

@@ -6,30 +6,19 @@ namespace PaintAstic.Module.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        public float movementUnit = 1;
-        float smoothSpeed = 1;
+        private float _smoothSpeed = 1;
 
-        Vector3 Movement;
-        Vector3 desiredPosition;
-        Vector3 smoothPosition;
+        private Vector3 _movement;
+        private Vector3 _desiredPosition;
+        private Vector3 _smoothPosition;
 
-        private void OnEnable()
+        public void Move(Vector3 move)
         {
-            EventManager.StartListening("Move", Move);
-        }
+            _movement = move;
 
-        private void OnDisable()
-        {
-            EventManager.StopListening("Move", Move);
-        }
-
-        void Move(object data)
-        {
-            Movement = (Vector3)data;
-
-            desiredPosition = transform.position + Movement;
-            smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = smoothPosition;
+            _desiredPosition = transform.position + _movement;
+            _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
+            transform.position = _smoothPosition;
         }
     }
 }
