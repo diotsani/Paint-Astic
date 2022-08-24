@@ -12,12 +12,12 @@ namespace PaintAstic.Scene.Gameplay.Items
 
         protected void Update()
         {
-            //_despawnDelayTimer += Time.deltaTime;
-            //if (_despawnDelayTimer > _despawnDelay)
-            //{
-            //    gameObject.SetActive(false);
-            //    _despawnDelayTimer = 0;
-            //}
+            _despawnDelayTimer += Time.deltaTime;
+            if (_despawnDelayTimer > _despawnDelay)
+            {
+                gameObject.SetActive(false);
+                _despawnDelayTimer = 0;
+            }
         }
 
         protected void OnTriggerEnter(Collider other)
