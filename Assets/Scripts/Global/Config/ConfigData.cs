@@ -24,6 +24,8 @@ namespace PaintAstic.Global.Config
             LoadData();
             EventManager.StartListening("SwitchBgmValueMessage", onSwitchBgmValue);
             EventManager.StartListening("SwitchSfxValueMessage", onSwitchSfxValue);
+            Debug.Log("BGM status: " + isBgmOn);
+            Debug.Log("SFX status: " + isSfxOn);
         }
 
         private void OnDisable()
@@ -38,12 +40,10 @@ namespace PaintAstic.Global.Config
             if (isBgmOn)
             {
                 PlayerPrefs.SetInt("BGM", 1); //BGM on
-                Debug.Log("BGM On");
             }
             else
             {
                 PlayerPrefs.SetInt("BGM", 0); //BGM off
-                Debug.Log("BGM Off");
             }
             PlayerPrefs.Save();
             Debug.Log("BGM status: " + isBgmOn);
@@ -55,12 +55,10 @@ namespace PaintAstic.Global.Config
             if (isSfxOn)
             {
                 PlayerPrefs.SetInt("SFX", 1); //SFX on
-                Debug.Log("SFX On");
             }
             else
             {
                 PlayerPrefs.SetInt("SFX", 0); //SFX off
-                Debug.Log("SFX Off");
             }
             PlayerPrefs.Save();
             Debug.Log("SFX status: " + isSfxOn);

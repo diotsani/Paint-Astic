@@ -652,7 +652,7 @@ MonoBehaviour:
   _sfxSource: {fileID: 1037078249}
   _collectPointSound: {fileID: 8300000, guid: 580ed6a0b616ff045986f851c5d7267f, type: 3}
   _bombSound: {fileID: 8300000, guid: 2ff23d6a9fdb6c943bdb033b2e31a469, type: 3}
-  _playerMoveSound: {fileID: 8300000, guid: 2aab3ab396e52b84c9aa210394d9fbf2, type: 3}
+  _playerMoveSound: {fileID: 8300000, guid: 8e974d168ba5fcb4eaba6bd77384c13e, type: 3}
 --- !u!1 &1989545286
 GameObject:
   m_ObjectHideFlags: 0
