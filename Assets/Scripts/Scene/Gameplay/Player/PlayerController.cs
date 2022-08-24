@@ -12,7 +12,6 @@ namespace PaintAstic.Module.Player
         Vector3 Movement;
         Vector3 desiredPosition;
         Vector3 smoothPosition;
-
         private void OnEnable()
         {
             EventManager.StartListening("Move", Move);
