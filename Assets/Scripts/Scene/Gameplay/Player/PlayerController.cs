@@ -7,6 +7,7 @@ namespace PaintAstic.Module.Player
     public class PlayerController : MonoBehaviour
     {
         private float _smoothSpeed = 1;
+        public int _playerIndex { get; set; }
 
         private Vector3 _movement;
         private Vector3 _desiredPosition;
@@ -19,6 +20,15 @@ namespace PaintAstic.Module.Player
             _desiredPosition = transform.position + _movement;
             _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
             transform.position = _smoothPosition;
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if(other.gameObject.CompareTag("Tile"))
+            {
+                Debug.Log(other.gameObject);
+                EventManager.TriggerEvent("SetColor", _playerIndex);
+            }
         }
     }
 }

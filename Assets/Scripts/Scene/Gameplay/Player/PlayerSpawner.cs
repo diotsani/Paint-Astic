@@ -41,6 +41,7 @@ namespace PaintAstic.Module.Player
             for (int i = 0; i < _maxPlayer; i++)
             {
                 PlayerController player = Instantiate(_player, transform);
+                player._playerIndex = i;
 
                 _pooledPlayers.Add(player);
             }

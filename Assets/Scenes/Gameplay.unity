@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4264436881831239895, guid: 5888d3fed130b564aa2e4305efa3dd34, type: 3}
+      propertyPath: gridPrefab
+      value: 
+      objectReference: {fileID: 6356317887174435505, guid: d16d19d3d8642cd4d863508b786aac0f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5888d3fed130b564aa2e4305efa3dd34, type: 3}
 --- !u!1 &2132779086
@@ -329,6 +333,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1479674750792472319, guid: fee6a77fcf693fc40a1a1609015778f2, type: 3}
+      propertyPath: _maxPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7209017926142490258, guid: fee6a77fcf693fc40a1a1609015778f2, type: 3}
       propertyPath: m_RootOrder
       value: 4

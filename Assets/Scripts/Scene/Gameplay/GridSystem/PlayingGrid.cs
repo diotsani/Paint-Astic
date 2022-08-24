@@ -8,9 +8,9 @@ public class PlayingGrid : MonoBehaviour
     int _height = 8;
     int _width = 8;
     private float _gridSpace = 1f;
-    [SerializeField] private Tile gridPrefab;
+    [SerializeField] private GameObject gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
-    private List<Tile> gridList = new List<Tile>();
+    private List<GameObject> gridList = new List<GameObject>();
 
     public int _amountColorOne;
     public int _amountColorTwo;
@@ -32,7 +32,7 @@ public class PlayingGrid : MonoBehaviour
     }
     void Spawn(Vector3 positionToSpawn, Quaternion rotationToSpawn)
     {
-        Tile gridObjects = Instantiate(gridPrefab, positionToSpawn, rotationToSpawn, transform);
+        GameObject gridObjects = Instantiate(gridPrefab, positionToSpawn, rotationToSpawn, transform);
         gridObjects.GetComponent<Tile>().DefaultColors();
         gridList.Add(gridObjects);
     }
