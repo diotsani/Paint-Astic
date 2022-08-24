@@ -110,7 +110,7 @@ namespace PaintAstic.Global
             }
         }
 
-        public static void TriggerEvent(string eventName, object data)
+        public static void TriggerEvent(string eventName,params object[] data)
         {
             TypedEvent thisEvent = null;
             if (instance.typedEventDictionary.TryGetValue(eventName, out thisEvent))
