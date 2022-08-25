@@ -1,5 +1,5 @@
 using PaintAstic.Global;
-using PaintAstic.Module.Player;
+using PaintAstic.Module.Message;
 using UnityEngine;
 
 namespace PaintAstic.Module.Inputs
@@ -8,7 +8,7 @@ namespace PaintAstic.Module.Inputs
     {
         [SerializeField] private InputConfig[] _inputConfigs;
 
-        void Update()
+        private void Update()
         {
             for (int i = 0; i < _inputConfigs.Length; i++)
             {

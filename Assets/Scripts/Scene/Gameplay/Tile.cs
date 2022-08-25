@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PaintAstic.Global;
+using PaintAstic.Module.Message;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField]private int _tileIndex;
+    [SerializeField]private int _tileIndexX;
+    [SerializeField]private int _tileIndexZ;
     private Color defaultColor = Color.gray;
     [SerializeField]private Color[] playerColor = { Color.red, Color.yellow };
     void Start()
     {
     }
-    public void SetIndexTile(int tileIndex)
+    
+    public void SetIndexTile(int tileIndexX, int tileIndexZ)
     {
-        _tileIndex = tileIndex;
+        _tileIndexX = tileIndexX;
+        _tileIndexZ = tileIndexZ;
     }
     public void DefaultColors()
     {
@@ -29,7 +33,7 @@ public class Tile : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            EventManager.TriggerEvent("SetIndexTile", _tileIndex);
+            EventManager.TriggerEvent("SetIndexTile", new TileIndexMessage(_tileIndexX, _tileIndexZ));
         }
     }
 }

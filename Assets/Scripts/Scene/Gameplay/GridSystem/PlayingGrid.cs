@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PaintAstic.Global;
+using System.Linq;
+using PaintAstic.Module.Message;
 
 public class PlayingGrid : MonoBehaviour
 {
-    private int _height = 8;
-    private int _width = 8;
+    public int _height { get; private set; } = 8;
+    public int _width { get; private set; } = 8;
     private float _gridSpace = 1f;
     [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
 
-    private List<Tile> gridList = new List<Tile>();
+    [SerializeField] private Tile gridPrefab;
+    //private List<Tile> gridList = new List<Tile>();
+    public Tile[,] gridList { get; private set; }
 
-    [SerializeField] private int _currentIndexTile;
+    [SerializeField] private int _currentIndexTileX;
+    [SerializeField] private int _currentIndexTileZ;
+
     //Useless
     private int _amountColorOne;
     private int _amountColorTwo;
@@ -34,31 +40,31 @@ public class PlayingGrid : MonoBehaviour
         EventManager.StopListening("SetIndexTile", GetIndexTile);
         EventManager.StopListening("SetColor", SetColorTile);
     }
-    
     public void GetIndexTile(object indexTile)
     {
-        _currentIndexTile = (int)indexTile;
-        Debug.Log(_currentIndexTile);
-        
+        TileIndexMessage tileIndexMessage = (TileIndexMessage)indexTile;
+        _currentIndexTileX = tileIndexMessage.tileIndexX;
+        _currentIndexTileZ = tileIndexMessage.tileIndexZ;
     }
     public void SetColorTile(object indexPlayer)
     {
         int colorIndex = (int)indexPlayer;
-        gridList[_currentIndexTile].ChangeColors(colorIndex);
+        gridList[_currentIndexTileX, _currentIndexTileZ].ChangeColors(colorIndex);
     }
     private void CreateGrid()
     {
+        gridList = new Tile[_height, _width];
         for (int x = 0; x < _height; x++)
         {
             for (int z = 0; z < _width; z++)
             {
                 Vector3 spawnPosition = new Vector3(x * _gridSpace, 0, z * _gridSpace) + gridOrigin;
                 Tile gridObjects = Instantiate(gridPrefab, spawnPosition, Quaternion.identity, transform);
+                gridList[x, z] = gridObjects;
 
                 gridObjects.gameObject.name = "Tile( " + ("X:" + x + " ,Z:" + z + " )");
                 gridObjects.DefaultColors();
-                gridList.Add(gridObjects);
-                gridObjects.SetIndexTile(gridList.Count - 1);
+                gridObjects.SetIndexTile(x,z);
             }
         }
     }

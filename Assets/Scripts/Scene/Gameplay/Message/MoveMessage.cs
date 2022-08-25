@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PaintAstic.Module.Player
+namespace PaintAstic.Module.Message
 {
     public struct MoveMessage
     {
