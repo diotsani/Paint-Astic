@@ -5,19 +5,47 @@ using PaintAstic.Global;
 
 public class PlayingGrid : MonoBehaviour
 {
-    int _height = 8;
-    int _width = 8;
+    private int _height = 8;
+    private int _width = 8;
     private float _gridSpace = 1f;
-    [SerializeField] private GameObject gridPrefab;
+    [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
-    private List<GameObject> gridList = new List<GameObject>();
 
-    public int _amountColorOne;
-    public int _amountColorTwo;
+    [SerializeField] private Tile gridPrefab;
+    private List<Tile> gridList = new List<Tile>();
+
+    [SerializeField] private int _currentIndexTile;
+    //Useless
+    private int _amountColorOne;
+    private int _amountColorTwo;
     private Color defaultColor = Color.gray;
+
     private void Awake()
     {
         CreateGrid();
+    }
+    private void OnEnable()
+    {
+        EventManager.StartListening("SetIndexTile", GetIndexTile);
+        EventManager.StartListening("SetColor", SetColorTile);
+        
+    }
+    private void OnDisable()
+    {
+        EventManager.StopListening("SetIndexTile", GetIndexTile);
+        EventManager.StopListening("SetColor", SetColorTile);
+    }
+    
+    public void GetIndexTile(object indexTile)
+    {
+        _currentIndexTile = (int)indexTile;
+        Debug.Log(_currentIndexTile);
+        
+    }
+    public void SetColorTile(object indexPlayer)
+    {
+        int colorIndex = (int)indexPlayer;
+        gridList[_currentIndexTile].ChangeColors(colorIndex);
     }
     private void CreateGrid()
     {
@@ -26,16 +54,17 @@ public class PlayingGrid : MonoBehaviour
             for (int z = 0; z < _width; z++)
             {
                 Vector3 spawnPosition = new Vector3(x * _gridSpace, 0, z * _gridSpace) + gridOrigin;
-                Spawn(spawnPosition, Quaternion.identity);
+                Tile gridObjects = Instantiate(gridPrefab, spawnPosition, Quaternion.identity, transform);
+
+                gridObjects.gameObject.name = "Tile( " + ("X:" + x + " ,Z:" + z + " )");
+                gridObjects.DefaultColors();
+                gridList.Add(gridObjects);
+                gridObjects.SetIndexTile(gridList.Count - 1);
             }
         }
     }
-    void Spawn(Vector3 positionToSpawn, Quaternion rotationToSpawn)
-    {
-        GameObject gridObjects = Instantiate(gridPrefab, positionToSpawn, rotationToSpawn, transform);
-        gridObjects.GetComponent<Tile>().DefaultColors();
-        gridList.Add(gridObjects);
-    }
+
+
     public void OnHitPlayerOne(GameObject obj) // Need Event On Trigger in Script Player
     {
         if (obj.GetComponent<MeshRenderer>().material.color == defaultColor)

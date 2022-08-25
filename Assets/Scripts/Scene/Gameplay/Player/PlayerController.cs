@@ -25,10 +25,9 @@ namespace PaintAstic.Module.Player
             _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
             transform.position = _smoothPosition;
         }
-
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionStay(Collision collision)
         {
-            if(other.gameObject.CompareTag("Tile"))
+            if(collision.gameObject.CompareTag("Tile"))
             {
                 EventManager.TriggerEvent("SetColor", playerIndex);
             }
