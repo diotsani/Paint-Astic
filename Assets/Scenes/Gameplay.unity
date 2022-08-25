@@ -335,7 +335,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1479674750792472319, guid: fee6a77fcf693fc40a1a1609015778f2, type: 3}
       propertyPath: _maxPlayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7209017926142490258, guid: fee6a77fcf693fc40a1a1609015778f2, type: 3}
       propertyPath: m_RootOrder
