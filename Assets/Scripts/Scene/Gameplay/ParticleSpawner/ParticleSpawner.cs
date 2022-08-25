@@ -24,12 +24,13 @@ namespace PaintAstic.Scene.Gameplay.ParticleSpawner
         private void OnDisable()
         {
             EventManager.StopListening("CollectPointParticleMessage", OnCollectPointParticle);
+            EventManager.StopListening("BombParticleMessage", OnBombParticle);
         }
 
         private void OnCollectPointParticle(object data)
         {
             Vector3 position = (Vector3)data;
-            SpawnParticleCollectItem(position);
+            SpawnParticleCollectPoint(position);
         }
 
         private void OnBombParticle(object data)
@@ -38,7 +39,7 @@ namespace PaintAstic.Scene.Gameplay.ParticleSpawner
             SpawnParticleBomb(position);
         }
 
-        private void SpawnParticleCollectItem(Vector3 position)
+        private void SpawnParticleCollectPoint(Vector3 position)
         {
             ParticleCollectPoint particleCollectPoint = _particleCollectPointPool.Find(i => !i.gameObject.activeSelf);
             if (particleCollectPoint == null)
