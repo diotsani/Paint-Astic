@@ -10,6 +10,9 @@ public class Tile : MonoBehaviour
     [SerializeField]public int tileIndexZ { get; private set; }
     private Color defaultColor = Color.gray;
     [SerializeField]private Color[] playerColor = { Color.red, Color.yellow };
+
+    public int _tileIndexColor;
+
     void Start()
     {
     }
@@ -28,6 +31,7 @@ public class Tile : MonoBehaviour
     {
         //int colorIndex = (int)indexPlayer;
         gameObject.GetComponent<Renderer>().material.color = playerColor[indexPlayer];
+        _tileIndexColor = indexPlayer + 1;
     }
     //private void OnCollisionEnter(Collision collision)
     //{

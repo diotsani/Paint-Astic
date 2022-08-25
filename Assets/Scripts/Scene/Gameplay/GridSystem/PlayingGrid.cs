@@ -13,7 +13,7 @@ public class PlayingGrid : MonoBehaviour
     [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
 
-    //private List<Tile> gridList = new List<Tile>();
+    private List<GameObject> tileList = new List<GameObject>();
     public Tile[,] gridList { get; private set; }
 
     [SerializeField] private int _currentIndexTileX;
@@ -32,6 +32,10 @@ public class PlayingGrid : MonoBehaviour
         CreateGrid();
 
         _indexQueueX = new Queue<int>();
+    }
+    private void Update()
+    {
+        GetS();
     }
     private void OnEnable()
     {
@@ -67,11 +71,24 @@ public class PlayingGrid : MonoBehaviour
             {
                 Vector3 spawnPosition = new Vector3(x * _gridSpace, 0, z * _gridSpace) + gridOrigin;
                 Tile gridObjects = Instantiate(gridPrefab, spawnPosition, Quaternion.identity, transform);
+                
                 gridList[x, z] = gridObjects;
 
+                tileList.Add(gridObjects.gameObject);
                 gridObjects.gameObject.name = "Tile( " + ("X:" + x + " ,Z:" + z + " )");
                 gridObjects.DefaultColors();
                 gridObjects.SetIndexTile(x,z);
+            }
+        }
+    }
+    void GetS()
+    {
+        foreach (GameObject item in tileList)
+        {
+            if (item.GetComponent<Tile>()._tileIndexColor == 1)
+            {
+                //GameObject[] tiles = item.gameObject.ToCharArray();
+                
             }
         }
     }
