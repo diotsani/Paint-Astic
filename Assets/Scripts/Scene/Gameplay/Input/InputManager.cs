@@ -14,7 +14,7 @@ namespace PaintAstic.Module.Inputs
             {
                 var inputConfig = _inputConfigs[i];
 
-                if (Input.GetKey(inputConfig.moveUp))
+                if (Input.GetKeyDown(inputConfig.moveUp))
                 {
                     EventManager.TriggerEvent("Move",new MoveMessage(Vector3.forward, i));
                 }

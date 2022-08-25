@@ -6,8 +6,8 @@ using PaintAstic.Module.Message;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField]private int _tileIndexX;
-    [SerializeField]private int _tileIndexZ;
+    [SerializeField]public int tileIndexX { get; private set; }
+    [SerializeField]public int tileIndexZ { get; private set; }
     private Color defaultColor = Color.gray;
     [SerializeField]private Color[] playerColor = { Color.red, Color.yellow };
     void Start()
@@ -16,8 +16,8 @@ public class Tile : MonoBehaviour
     
     public void SetIndexTile(int tileIndexX, int tileIndexZ)
     {
-        _tileIndexX = tileIndexX;
-        _tileIndexZ = tileIndexZ;
+        this.tileIndexX = tileIndexX;
+        this.tileIndexZ = tileIndexZ;
     }
     public void DefaultColors()
     {
@@ -29,11 +29,11 @@ public class Tile : MonoBehaviour
         //int colorIndex = (int)indexPlayer;
         gameObject.GetComponent<Renderer>().material.color = playerColor[indexPlayer];
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            EventManager.TriggerEvent("SetIndexTile", new TileIndexMessage(_tileIndexX, _tileIndexZ));
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.gameObject.CompareTag("Player"))
+    //    {
+    //        EventManager.TriggerEvent("SetIndexTile", new TileIndexMessage(tileIndexX, tileIndexZ));
+    //    }
+    //}
 }

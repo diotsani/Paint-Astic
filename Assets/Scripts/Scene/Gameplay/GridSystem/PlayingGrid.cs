@@ -13,12 +13,14 @@ public class PlayingGrid : MonoBehaviour
     [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
 
-    [SerializeField] private Tile gridPrefab;
     //private List<Tile> gridList = new List<Tile>();
     public Tile[,] gridList { get; private set; }
 
     [SerializeField] private int _currentIndexTileX;
     [SerializeField] private int _currentIndexTileZ;
+
+    private Queue<int> _indexQueueX;
+    private Queue<int> _indexQueueZ;
 
     //Useless
     private int _amountColorOne;
@@ -28,16 +30,18 @@ public class PlayingGrid : MonoBehaviour
     private void Awake()
     {
         CreateGrid();
+
+        _indexQueueX = new Queue<int>();
     }
     private void OnEnable()
     {
-        EventManager.StartListening("SetIndexTile", GetIndexTile);
+        //EventManager.StartListening("SetIndexTile", GetIndexTile);
         EventManager.StartListening("SetColor", SetColorTile);
         
     }
     private void OnDisable()
     {
-        EventManager.StopListening("SetIndexTile", GetIndexTile);
+        //EventManager.StopListening("SetIndexTile", GetIndexTile);
         EventManager.StopListening("SetColor", SetColorTile);
     }
     public void GetIndexTile(object indexTile)
@@ -45,11 +49,14 @@ public class PlayingGrid : MonoBehaviour
         TileIndexMessage tileIndexMessage = (TileIndexMessage)indexTile;
         _currentIndexTileX = tileIndexMessage.tileIndexX;
         _currentIndexTileZ = tileIndexMessage.tileIndexZ;
+
+        _indexQueueX.Enqueue(_currentIndexTileX);
+        _indexQueueZ.Enqueue(_currentIndexTileZ);
     }
     public void SetColorTile(object indexPlayer)
     {
-        int colorIndex = (int)indexPlayer;
-        gridList[_currentIndexTileX, _currentIndexTileZ].ChangeColors(colorIndex);
+        SetColorMessage colorIndex = (SetColorMessage)indexPlayer;
+        gridList[colorIndex.playerXPos, colorIndex.playerZPos].ChangeColors(colorIndex.playerIndex);
     }
     private void CreateGrid()
     {
