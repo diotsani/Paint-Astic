@@ -16,9 +16,17 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
 
         private bool _isRunning;
         private float _spawnDelayTimer;
+        private int _prevX;
+        private int _prevZ;
 
         private List<ItemCollectPoint> _collectPointPool = new List<ItemCollectPoint>();
         private List<ItemBomb> _bombPool = new List<ItemBomb>();
+
+        private void Start()
+        {
+            _prevX = -1;
+            _prevZ = -1;
+        }
 
         private void Update()
         {
@@ -74,6 +82,12 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
         private void ConfigSpawnedItem(BaseItem baseItem)
         {
             baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 0, Random.Range(0, _spawnRadiusZ));
+            while ((baseItem.transform.position.x == _prevX) && (baseItem.transform.position.z == _prevZ))
+            {
+                baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 0, Random.Range(0, _spawnRadiusZ));
+            }
+            _prevX = (int)baseItem.transform.position.x;
+            _prevZ = (int)baseItem.transform.position.z;
             baseItem.gameObject.SetActive(true);
         }
     }
