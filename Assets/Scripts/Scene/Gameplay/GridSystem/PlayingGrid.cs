@@ -12,8 +12,8 @@ public class PlayingGrid : MonoBehaviour
 
     [SerializeField] private Tile gridPrefab;
     private List<Tile> gridList = new List<Tile>();
-    Tile[,] tiles;
 
+    [SerializeField] private int _currentIndexTile;
     //Useless
     private int _amountColorOne;
     private int _amountColorTwo;
@@ -23,21 +23,47 @@ public class PlayingGrid : MonoBehaviour
     {
         CreateGrid();
     }
+    private void OnEnable()
+    {
+        EventManager.StartListening("SetIndexTile", GetIndexTile);
+        EventManager.StartListening("SetColor", SetColorTile);
+        
+    }
+    private void OnDisable()
+    {
+        EventManager.StopListening("SetIndexTile", GetIndexTile);
+        EventManager.StopListening("SetColor", SetColorTile);
+    }
+    
+    public void GetIndexTile(object indexTile)
+    {
+        _currentIndexTile = (int)indexTile;
+        Debug.Log(_currentIndexTile);
+        
+    }
+    public void SetColorTile(object indexPlayer)
+    {
+        int colorIndex = (int)indexPlayer;
+        gridList[_currentIndexTile].ChangeColors(colorIndex);
+    }
     private void CreateGrid()
     {
-        tiles = new Tile[_height,_width];
         for (int x = 0; x < _height; x++)
         {
             for (int z = 0; z < _width; z++)
             {
                 Vector3 spawnPosition = new Vector3(x * _gridSpace, 0, z * _gridSpace) + gridOrigin;
                 Tile gridObjects = Instantiate(gridPrefab, spawnPosition, Quaternion.identity, transform);
-                tiles[x, z] = gridObjects;
+
+                gridObjects.gameObject.name = "Tile( " + ("X:" + x + " ,Z:" + z + " )");
                 gridObjects.DefaultColors();
                 gridList.Add(gridObjects);
+                gridObjects.SetIndexTile(gridList.Count - 1);
             }
         }
     }
+
+
     public void OnHitPlayerOne(GameObject obj) // Need Event On Trigger in Script Player
     {
         if (obj.GetComponent<MeshRenderer>().material.color == defaultColor)

@@ -8,7 +8,7 @@ namespace PaintAstic.Module.Inputs
     {
         [SerializeField] private InputConfig[] _inputConfigs;
 
-        void FixedUpdate()
+        void Update()
         {
             for (int i = 0; i < _inputConfigs.Length; i++)
             {
