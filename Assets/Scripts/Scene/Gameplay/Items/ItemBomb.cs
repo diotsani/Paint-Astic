@@ -10,6 +10,7 @@ namespace PaintAstic.Scene.Gameplay.Items
         public override void OnCollided()
         {
             EventManager.TriggerEvent("BombMessage");
+            EventManager.TriggerEvent("BombParticleMessage", transform.position);
             EventManager.TriggerEvent("RevertTilesMessage");
             gameObject.SetActive(false);
         }
