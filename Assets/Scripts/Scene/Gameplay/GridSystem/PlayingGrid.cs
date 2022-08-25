@@ -11,7 +11,6 @@ public class PlayingGrid : MonoBehaviour
     [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
 
-    [SerializeField] private Tile gridPrefab;
     private List<Tile> gridList = new List<Tile>();
 
     [SerializeField] private int _currentIndexTile;

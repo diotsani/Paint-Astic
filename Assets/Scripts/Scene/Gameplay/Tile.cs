@@ -11,7 +11,6 @@ public class Tile : MonoBehaviour
     void Start()
     {
     }
-    
     public void SetIndexTile(int tileIndex)
     {
         _tileIndex = tileIndex;
