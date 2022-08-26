@@ -1,5 +1,6 @@
 using PaintAstic.Global;
 using PaintAstic.Module.Message;
+using PaintAstic.Module.Player;
 using UnityEngine;
 
 namespace PaintAstic.Module.Inputs
@@ -16,7 +17,7 @@ namespace PaintAstic.Module.Inputs
 
                 if (Input.GetKeyDown(inputConfig.moveUp))
                 {
-                    EventManager.TriggerEvent("Move",new MoveMessage(Vector3.forward, i));
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.forward, i));
                 }
                 if (Input.GetKeyDown(inputConfig.moveDown))
                 {
@@ -31,7 +32,6 @@ namespace PaintAstic.Module.Inputs
                     EventManager.TriggerEvent("Move", new MoveMessage(Vector3.right, i));
                 }
             }
-            
         }
     }
 }

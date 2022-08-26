@@ -50,7 +50,7 @@ namespace PaintAstic.Module.Player
         {
             MoveMessage moveMessage = (MoveMessage)data;
 
-            _pooledPlayers[moveMessage._playerId].Move(moveMessage._move);
+            _pooledPlayers[moveMessage.playerId].Move(moveMessage.move);
         }
 
         void SpawnPlayer()
