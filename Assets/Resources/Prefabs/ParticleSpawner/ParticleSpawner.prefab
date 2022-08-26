@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b645496a1e59d3943841b32f35e4358e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleCollectPointPrefab: {fileID: 1960351705161552732, guid: cb508a31e62153f44b55ee235dd9dddc, type: 3}
-  _particleBombPrefab: {fileID: 8533319977591525106, guid: 103d2055cf30d1d4bb669502f71ca3af, type: 3}
+  _particleCollectPointPrefab: {fileID: -4055376328956183140, guid: cb508a31e62153f44b55ee235dd9dddc, type: 3}
+  _particleBombPrefab: {fileID: 686594802541543727, guid: 103d2055cf30d1d4bb669502f71ca3af, type: 3}

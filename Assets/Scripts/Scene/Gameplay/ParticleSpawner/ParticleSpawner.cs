@@ -9,11 +9,11 @@ namespace PaintAstic.Scene.Gameplay.ParticleSpawner
 {
     public class ParticleSpawner : MonoBehaviour
     {
-        [SerializeField] private ParticleCollectPoint _particleCollectPointPrefab;
-        [SerializeField] private ParticleBomb _particleBombPrefab;
+        [SerializeField] private BaseParticle _particleCollectPointPrefab;
+        [SerializeField] private BaseParticle _particleBombPrefab;
 
-        private List<ParticleCollectPoint> _particleCollectPointPool = new List<ParticleCollectPoint>();
-        private List<ParticleBomb> _particleBombPool = new List<ParticleBomb>();
+        private List<BaseParticle> _particleCollectPointPool = new List<BaseParticle>();
+        private List<BaseParticle> _particleBombPool = new List<BaseParticle>();
 
         private void OnEnable()
         {
@@ -30,43 +30,24 @@ namespace PaintAstic.Scene.Gameplay.ParticleSpawner
         private void OnCollectPointParticle(object data)
         {
             Vector3 position = (Vector3)data;
-            SpawnParticleCollectPoint(position);
+            InstantiateParticle(_particleCollectPointPrefab, _particleCollectPointPool, position);
         }
 
         private void OnBombParticle(object data)
         {
             Vector3 position = (Vector3)data;
-            SpawnParticleBomb(position);
+            InstantiateParticle(_particleBombPrefab, _particleBombPool, position);
         }
 
-        private void SpawnParticleCollectPoint(Vector3 position)
+        private void InstantiateParticle(BaseParticle prefab, List<BaseParticle> pool, Vector3 position)
         {
-            ParticleCollectPoint particleCollectPoint = _particleCollectPointPool.Find(i => !i.gameObject.activeSelf);
-            if (particleCollectPoint == null)
+            BaseParticle baseParticle = pool.Find(i => !i.gameObject.activeSelf);
+            if (baseParticle == null)
             {
-                particleCollectPoint = InstantiateParticle(_particleCollectPointPrefab, _particleCollectPointPool);
+                baseParticle = Instantiate(prefab, transform);
+                pool.Add(baseParticle);
             }
-
-            ConfigSpawnedParticle(particleCollectPoint, position);
-        }
-
-        private void SpawnParticleBomb(Vector3 position)
-        {
-            ParticleBomb particleBomb = _particleBombPool.Find(i => !i.gameObject.activeSelf);
-            if (particleBomb == null)
-            {
-                particleBomb = InstantiateParticle(_particleBombPrefab, _particleBombPool);
-            }
-
-            ConfigSpawnedParticle(particleBomb, position);
-        }
-
-        private T InstantiateParticle<T>(T prefab, List<T> pool) where T : BaseParticle
-        {
-            T baseParticle = Instantiate(prefab, transform);
-            pool.Add(baseParticle);
-
-            return baseParticle;
+            ConfigSpawnedParticle(baseParticle, position);
         }
 
         private void ConfigSpawnedParticle(BaseParticle baseParticle, Vector3 position)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PaintAstic.Scene.Gameplay.Particles
 {
-    public abstract class BaseParticle : MonoBehaviour
+    public class BaseParticle : MonoBehaviour
     {
         [SerializeField] protected float _despawnDelay = 2f;
         protected float _despawnDelayTimer;
