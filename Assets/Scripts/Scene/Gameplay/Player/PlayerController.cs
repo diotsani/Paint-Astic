@@ -7,6 +7,7 @@ namespace PaintAstic.Module.Player
     public class PlayerController : MonoBehaviour
     {
         private float _smoothSpeed = 1;
+        private float _intervalMove = 0.5f;
         private float _timer = 0;
         public int playerIndex { get; set; }
         public int currentX { get; private set; }
@@ -17,34 +18,46 @@ namespace PaintAstic.Module.Player
         private Vector3 _desiredPosition;
         private Vector3 _smoothPosition;
 
-        public void Move(Vector3 move)
-        {
-            _movement = move;
-            if (_movement == Vector3.left && currentX == 0)
-            {
-                return;
-            }
-            if (_movement == Vector3.right && currentX == 7)
-            {
-                return;
-            }
-            if (_movement == Vector3.forward && currentZ == 7)
-            {
-                return;
-            }
-            if (_movement == Vector3.back && currentZ == 0)
-            {
-                return;
-            }
-            _desiredPosition = transform.position + _movement;
+        private bool isMovable;
 
-            _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
+        private void Update()
+        {
             _timer += Time.deltaTime;
 
-            if (_timer >= 0.4f)
+            if(_timer > _intervalMove)
             {
-                _timer = 0;
+                isMovable = true;
+            }
+        }
+
+        public void Move(Vector3 move)
+        {
+            if (isMovable)
+            {
+                _movement = move;
+                if (_movement == Vector3.left && currentX == 0)
+                {
+                    return;
+                }
+                if (_movement == Vector3.right && currentX == 7)
+                {
+                    return;
+                }
+                if (_movement == Vector3.forward && currentZ == 7)
+                {
+                    return;
+                }
+                if (_movement == Vector3.back && currentZ == 0)
+                {
+                    return;
+                }
+                _desiredPosition = transform.position + _movement;
+
+                _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
+
                 transform.position = _smoothPosition;
+                isMovable = false;
+                _timer = 0;
             }
             
         }
