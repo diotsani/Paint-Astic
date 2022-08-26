@@ -3,6 +3,7 @@ using PaintAstic.Module.Message;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 namespace PaintAstic.Module.Player
 {
@@ -16,7 +17,6 @@ namespace PaintAstic.Module.Player
         private Vector3 _movement;
         private Vector3 _desiredPosition;
         private Vector3 _smoothPosition;
-
         public void Move(Vector3 move)
         {
             _movement = move;

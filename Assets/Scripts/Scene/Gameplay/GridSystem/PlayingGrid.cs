@@ -14,28 +14,19 @@ public class PlayingGrid : MonoBehaviour
     public Vector3 gridOrigin = Vector3.zero;
 
     private List<GameObject> tileList = new List<GameObject>();
+    public List<GameObject> getScore = new List<GameObject>();
     public Tile[,] gridList { get; private set; }
 
+    [SerializeField]private int _amountColorTile;
     [SerializeField] private int _currentIndexTileX;
     [SerializeField] private int _currentIndexTileZ;
 
-    private Queue<int> _indexQueueX;
-    private Queue<int> _indexQueueZ;
-
-    //Useless
-    private int _amountColorOne;
     private int _amountColorTwo;
     private Color defaultColor = Color.gray;
 
     private void Awake()
     {
         CreateGrid();
-
-        _indexQueueX = new Queue<int>();
-    }
-    private void Update()
-    {
-        GetS();
     }
     private void OnEnable()
     {
@@ -53,9 +44,6 @@ public class PlayingGrid : MonoBehaviour
         TileIndexMessage tileIndexMessage = (TileIndexMessage)indexTile;
         _currentIndexTileX = tileIndexMessage.tileIndexX;
         _currentIndexTileZ = tileIndexMessage.tileIndexZ;
-
-        _indexQueueX.Enqueue(_currentIndexTileX);
-        _indexQueueZ.Enqueue(_currentIndexTileZ);
     }
     public void SetColorTile(object indexPlayer)
     {
@@ -81,30 +69,56 @@ public class PlayingGrid : MonoBehaviour
             }
         }
     }
-    void GetS()
+
+    public void GetScoreCollect(int indexPlayer)
     {
-        foreach (GameObject item in tileList)
+        for (int x = 0; x < _height; x++)
         {
-            if (item.GetComponent<Tile>()._tileIndexColor == 1)
+            for (int z = 0; z < _width; z++)
             {
-                //GameObject[] tiles = item.gameObject.ToCharArray();
-                
+                if(gridList[x,z]._tileIndexColor == indexPlayer+1)
+                {
+                    _amountColorTile++;
+                }
             }
         }
     }
 
 
+    #region Trash
+    public void GetS()
+    {
+        foreach (GameObject item in tileList)
+        {
+            if (item.GetComponent<Tile>()._tileIndexColor == 1)
+            {
+                GameObject tiles = item.gameObject;
+                getScore.Add(tiles);
+                _amountColorTile = getScore.Count;
+                Debug.Log(getScore.Count);
+            }
+        }
+    }
+
+    public void RemoveS()
+    {
+        for (int i = getScore.Count -1; i >= 0; i--)
+        {
+            getScore.RemoveAt(i);
+        }
+    }
+
     public void OnHitPlayerOne(GameObject obj) // Need Event On Trigger in Script Player
     {
         if (obj.GetComponent<MeshRenderer>().material.color == defaultColor)
         {
-            _amountColorOne += 1;
+            _amountColorTile += 1;
             obj.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
 
         if (obj.GetComponent<MeshRenderer>().material.color == Color.red)
         {
-            _amountColorOne += 1;
+            _amountColorTile += 1;
             _amountColorTwo -= 1;
             obj.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
@@ -119,7 +133,7 @@ public class PlayingGrid : MonoBehaviour
 
         if (obj.GetComponent<MeshRenderer>().material.color == Color.yellow)
         {
-            _amountColorOne -= 1;
+            _amountColorTile -= 1;
             _amountColorTwo += 1;
             obj.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
         }
@@ -128,13 +142,13 @@ public class PlayingGrid : MonoBehaviour
     {
         if (obj.material.color == defaultColor)
         {
-            _amountColorOne += 1;
+            _amountColorTile += 1;
             obj.material.color = Color.yellow;
         }
 
         if (obj.material.color == Color.red)
         {
-            _amountColorOne += 1;
+            _amountColorTile += 1;
             _amountColorTwo -= 1;
             obj.material.color = Color.yellow;
         }
@@ -149,9 +163,10 @@ public class PlayingGrid : MonoBehaviour
 
         if (obj.material.color == Color.yellow)
         {
-            _amountColorOne -= 1;
+            _amountColorTile -= 1;
             _amountColorTwo += 1;
             obj.material.color = Color.red;
         }
     }
+    #endregion
 }
