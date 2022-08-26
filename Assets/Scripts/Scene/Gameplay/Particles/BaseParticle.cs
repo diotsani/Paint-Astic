@@ -1,3 +1,4 @@
+using PaintAstic.Global;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,14 @@ namespace PaintAstic.Scene.Gameplay.Particles
         protected void OnEnable()
         {
             _despawnDelayTimer = 0f;
+            EventManager.StartListening("OnGamePauseMessage", OnGamePause);
+            EventManager.StartListening("OnGameContinueMessage", OnGameContinue);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.StopListening("OnGamePauseMessage", OnGamePause);
+            EventManager.StopListening("OnGameContinueMessage", OnGameContinue);
         }
 
         protected void Update()
@@ -22,6 +31,16 @@ namespace PaintAstic.Scene.Gameplay.Particles
                 gameObject.SetActive(false);
                 _despawnDelayTimer = 0f;
             }
+        }
+
+        private void OnGamePause()
+        {
+            Time.timeScale = 0f;
+        }
+
+        private void OnGameContinue()
+        {
+            Time.timeScale = 1f;
         }
     }
 }

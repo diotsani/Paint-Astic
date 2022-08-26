@@ -1,3 +1,4 @@
+using PaintAstic.Global;
 using PaintAstic.Scene.Gameplay.Items;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,18 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
         private List<ItemCollectPoint> _collectPointPool = new List<ItemCollectPoint>();
         private List<ItemBomb> _bombPool = new List<ItemBomb>();
 
+        private void OnEnable()
+        {
+            EventManager.StartListening("OnGamePauseMessage", OnGamePause);
+            EventManager.StartListening("OnGameContinueMessage", OnGameContinue);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.StopListening("OnGamePauseMessage", OnGamePause);
+            EventManager.StopListening("OnGameContinueMessage", OnGameContinue);
+        }
+
         private void Start()
         {
             _prevX = -1;
@@ -34,7 +47,6 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
             if (_spawnDelayTimer > _spawnDelay)
             {
                 SpawnRandomItem();
-                Debug.Log("Spawn!");
                 _spawnDelayTimer = 0;
             }
         }
@@ -81,14 +93,24 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
 
         private void ConfigSpawnedItem(BaseItem baseItem)
         {
-            baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 0, Random.Range(0, _spawnRadiusZ));
+            baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 2, Random.Range(0, _spawnRadiusZ));
             while ((baseItem.transform.position.x == _prevX) && (baseItem.transform.position.z == _prevZ))
             {
-                baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 0, Random.Range(0, _spawnRadiusZ));
+                baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 2, Random.Range(0, _spawnRadiusZ));
             }
             _prevX = (int)baseItem.transform.position.x;
             _prevZ = (int)baseItem.transform.position.z;
             baseItem.gameObject.SetActive(true);
+        }
+
+        private void OnGamePause()
+        {
+            Time.timeScale = 0f;
+        }
+
+        private void OnGameContinue()
+        {
+            Time.timeScale = 1f;
         }
     }
 }

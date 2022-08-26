@@ -40,11 +40,11 @@ namespace PaintAstic.Module.Player
 
             _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
             _timer += Time.deltaTime;
+            transform.position = _smoothPosition;
 
             if (_timer >= 0.4f)
             {
                 _timer = 0;
-                transform.position = _smoothPosition;
             }
             
         }

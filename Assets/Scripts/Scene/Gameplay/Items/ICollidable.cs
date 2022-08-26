@@ -6,7 +6,7 @@ namespace PaintAstic.Scene.Gameplay.Items
 {
     public interface ICollidable
     {
-        void OnCollided();
+        void OnCollided(int playerIndex);
     }
 
 }
