@@ -2,31 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PaintAstic.Global;
+using PaintAstic.Module.Message;
 
 public class Tile : MonoBehaviour
 {
+    [SerializeField]public int tileIndexX { get; private set; }
+    [SerializeField]public int tileIndexZ { get; private set; }
     private Color defaultColor = Color.gray;
     [SerializeField]private Color[] playerColor = { Color.red, Color.yellow };
     void Start()
     {
     }
-    private void OnEnable()
+    
+    public void SetIndexTile(int tileIndexX, int tileIndexZ)
     {
-        EventManager.StartListening("SetColor", ChangeColors);
-    }
-    private void OnDisable()
-    {
-        EventManager.StopListening("SetColor", ChangeColors);
+        this.tileIndexX = tileIndexX;
+        this.tileIndexZ = tileIndexZ;
     }
     public void DefaultColors()
     {
         gameObject.GetComponent<Renderer>().material.color = defaultColor;
     }
 
-    private void ChangeColors(object indexPlayer)
+    public void ChangeColors(int indexPlayer)
     {
-        int colorIndex = (int)indexPlayer;
-        gameObject.GetComponent<Renderer>().material.color = playerColor[colorIndex];
+        //int colorIndex = (int)indexPlayer;
+        gameObject.GetComponent<Renderer>().material.color = playerColor[indexPlayer];
     }
-
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.gameObject.CompareTag("Player"))
+    //    {
+    //        EventManager.TriggerEvent("SetIndexTile", new TileIndexMessage(tileIndexX, tileIndexZ));
+    //    }
+    //}
 }

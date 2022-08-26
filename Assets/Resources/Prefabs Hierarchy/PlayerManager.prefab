@@ -54,6 +54,10 @@ MonoBehaviour:
     _moveDown: 107
     _moveLeft: 106
     _moveRight: 108
+  - _moveUp: 273
+    _moveDown: 274
+    _moveLeft: 276
+    _moveRight: 275
 --- !u!114 &1479674750792472319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,4 +71,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 6743767407168415809, guid: 0b4c8e72d5797674f871013b30a4452d, type: 3}
+  _playingGrid: {fileID: 0}
   _maxPlayer: 2

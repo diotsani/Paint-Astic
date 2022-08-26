@@ -2,40 +2,81 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PaintAstic.Global;
+using System.Linq;
+using PaintAstic.Module.Message;
 
 public class PlayingGrid : MonoBehaviour
 {
-    int _height = 8;
-    int _width = 8;
+    public int _height { get; private set; } = 8;
+    public int _width { get; private set; } = 8;
     private float _gridSpace = 1f;
     [SerializeField] private Tile gridPrefab;
     public Vector3 gridOrigin = Vector3.zero;
-    private List<Tile> gridList = new List<Tile>();
 
-    public int _amountColorOne;
-    public int _amountColorTwo;
+    //private List<Tile> gridList = new List<Tile>();
+    public Tile[,] gridList { get; private set; }
+
+    [SerializeField] private int _currentIndexTileX;
+    [SerializeField] private int _currentIndexTileZ;
+
+    private Queue<int> _indexQueueX;
+    private Queue<int> _indexQueueZ;
+
+    //Useless
+    private int _amountColorOne;
+    private int _amountColorTwo;
     private Color defaultColor = Color.gray;
+
     private void Awake()
     {
         CreateGrid();
+
+        _indexQueueX = new Queue<int>();
+    }
+    private void OnEnable()
+    {
+        //EventManager.StartListening("SetIndexTile", GetIndexTile);
+        EventManager.StartListening("SetColor", SetColorTile);
+        
+    }
+    private void OnDisable()
+    {
+        //EventManager.StopListening("SetIndexTile", GetIndexTile);
+        EventManager.StopListening("SetColor", SetColorTile);
+    }
+    public void GetIndexTile(object indexTile)
+    {
+        TileIndexMessage tileIndexMessage = (TileIndexMessage)indexTile;
+        _currentIndexTileX = tileIndexMessage.tileIndexX;
+        _currentIndexTileZ = tileIndexMessage.tileIndexZ;
+
+        _indexQueueX.Enqueue(_currentIndexTileX);
+        _indexQueueZ.Enqueue(_currentIndexTileZ);
+    }
+    public void SetColorTile(object indexPlayer)
+    {
+        SetColorMessage colorIndex = (SetColorMessage)indexPlayer;
+        gridList[colorIndex.playerXPos, colorIndex.playerZPos].ChangeColors(colorIndex.playerIndex);
     }
     private void CreateGrid()
     {
+        gridList = new Tile[_height, _width];
         for (int x = 0; x < _height; x++)
         {
             for (int z = 0; z < _width; z++)
             {
                 Vector3 spawnPosition = new Vector3(x * _gridSpace, 0, z * _gridSpace) + gridOrigin;
-                Spawn(spawnPosition, Quaternion.identity);
+                Tile gridObjects = Instantiate(gridPrefab, spawnPosition, Quaternion.identity, transform);
+                gridList[x, z] = gridObjects;
+
+                gridObjects.gameObject.name = "Tile( " + ("X:" + x + " ,Z:" + z + " )");
+                gridObjects.DefaultColors();
+                gridObjects.SetIndexTile(x,z);
             }
         }
     }
-    void Spawn(Vector3 positionToSpawn, Quaternion rotationToSpawn)
-    {
-        Tile gridObjects = Instantiate(gridPrefab, positionToSpawn, rotationToSpawn, transform);
-        gridObjects.GetComponent<Tile>().DefaultColors();
-        gridList.Add(gridObjects);
-    }
+
+
     public void OnHitPlayerOne(GameObject obj) // Need Event On Trigger in Script Player
     {
         if (obj.GetComponent<MeshRenderer>().material.color == defaultColor)
