@@ -10,6 +10,7 @@ namespace PaintAstic.Module.Player
     public class PlayerController : MonoBehaviour
     {
         private float _smoothSpeed = 1;
+        private float _intervalMove = 0.5f;
         private float _timer = 0;
         public int playerIndex { get; set; }
         public int currentX { get; private set; }
@@ -19,33 +20,46 @@ namespace PaintAstic.Module.Player
         private Vector3 _movement;
         private Vector3 _desiredPosition;
         private Vector3 _smoothPosition;
+
+        private bool isMovable;
+
+        private void Update()
+        {
+            _timer += Time.deltaTime;
+
+            if(_timer > _intervalMove)
+            {
+                isMovable = true;
+            }
+        }
+
         public void Move(Vector3 move)
         {
-            _movement = move;
-            if (_movement == Vector3.left && currentX == 0)
+            if (isMovable)
             {
-                return;
-            }
-            if (_movement == Vector3.right && currentX == 7)
-            {
-                return;
-            }
-            if (_movement == Vector3.forward && currentZ == 7)
-            {
-                return;
-            }
-            if (_movement == Vector3.back && currentZ == 0)
-            {
-                return;
-            }
-            _desiredPosition = transform.position + _movement;
+                _movement = move;
+                if (_movement == Vector3.left && currentX == 0)
+                {
+                    return;
+                }
+                if (_movement == Vector3.right && currentX == 7)
+                {
+                    return;
+                }
+                if (_movement == Vector3.forward && currentZ == 7)
+                {
+                    return;
+                }
+                if (_movement == Vector3.back && currentZ == 0)
+                {
+                    return;
+                }
+                _desiredPosition = transform.position + _movement;
 
-            _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
-            _timer += Time.deltaTime;
-            transform.position = _smoothPosition;
+                _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
 
-            if (_timer >= 0.4f)
-            {
+                transform.position = _smoothPosition;
+                isMovable = false;
                 _timer = 0;
             }
             
