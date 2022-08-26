@@ -52,7 +52,6 @@ namespace PaintAstic.Global.GameAudio
         public void PlaySfx(AudioClip clip)
         {
             _sfxSource.PlayOneShot(clip);
-            Debug.Log("SFX played!");
         }
 
         public void OnCollectPoint()

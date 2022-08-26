@@ -1,4 +1,5 @@
 using PaintAstic.Global;
+using PaintAstic.Module.GridSystem;
 using PaintAstic.Module.Message;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace PaintAstic.Module.Player
         [SerializeField] private PlayerController _player;
         [SerializeField] private PlayingGrid _playingGrid;
 
-        [SerializeField] private int _maxPlayer;
+        public int _maxPlayer { get;} = 2;
 
         private List<PlayerController> _pooledPlayers;
         private List<Vector3> _spawnPos;

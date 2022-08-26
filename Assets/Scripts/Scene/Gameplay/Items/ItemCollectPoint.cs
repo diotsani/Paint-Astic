@@ -9,7 +9,6 @@ namespace PaintAstic.Scene.Gameplay.Items
     {
         public override void OnCollided(int playerIndex)
         {
-            Debug.Log(playerIndex);
             EventManager.TriggerEvent("CollectPointMessage", playerIndex);
             EventManager.TriggerEvent("CollectPointParticleMessage", transform.position);
             EventManager.TriggerEvent("CollectedMessage");

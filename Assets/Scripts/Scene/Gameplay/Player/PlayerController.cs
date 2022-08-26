@@ -3,6 +3,7 @@ using PaintAstic.Module.Message;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using PaintAstic.Module.Tiles;
 
 namespace PaintAstic.Module.Player
 {
