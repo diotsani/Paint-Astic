@@ -32,12 +32,16 @@ public class PlayingGrid : MonoBehaviour
     {
         //EventManager.StartListening("SetIndexTile", GetIndexTile);
         EventManager.StartListening("SetColor", SetColorTile);
+        EventManager.StartListening("CollectPointMessage", GetScoreCollect);
+        EventManager.StartListening("RevertTilesMessage", RevertTiles);
         
     }
     private void OnDisable()
     {
         //EventManager.StopListening("SetIndexTile", GetIndexTile);
         EventManager.StopListening("SetColor", SetColorTile);
+        EventManager.StopListening("CollectPointMessage", GetScoreCollect);
+        EventManager.StopListening("RevertTilesMessage", RevertTiles);
     }
     public void GetIndexTile(object indexTile)
     {
@@ -70,21 +74,40 @@ public class PlayingGrid : MonoBehaviour
         }
     }
 
-    public void GetScoreCollect(int indexPlayer)
+    public void GetScoreCollect(object indexPlayer)
     {
+        int index = (int)indexPlayer;
         for (int x = 0; x < _height; x++)
         {
             for (int z = 0; z < _width; z++)
             {
-                if(gridList[x,z]._tileIndexColor == indexPlayer+1)
+                if(gridList[x,z]._tileIndexColor == index+1)
                 {
                     _amountColorTile++;
+                    gridList[x, z].DefaultColors();
+                }
+            }
+        }
+        Debug.Log("Amount Color Tile: " + _amountColorTile + index);
+        EventManager.TriggerEvent("AddPoint", _amountColorTile); //tambahin struct player index + ammountColorTile
+        _amountColorTile = 0;
+    }
+    
+    public void RevertTiles(object indexPlayer)
+    {
+        int index = (int)indexPlayer;
+        for (int x = 0; x < _height; x++)
+        {
+            for (int z = 0; z < _width; z++)
+            {
+                if (gridList[x, z]._tileIndexColor == index + 1)
+                {
+                    gridList[x, z].DefaultColors();
                 }
             }
         }
     }
-
-
+    
     #region Trash
     public void GetS()
     {
