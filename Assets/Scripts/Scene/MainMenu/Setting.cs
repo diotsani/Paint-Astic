@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 using PaintAstic.Global;
+using PaintAstic.Global.Config;
 
 namespace PaintAstic.Scene.MainMenu
 {
@@ -16,12 +17,16 @@ namespace PaintAstic.Scene.MainMenu
         [SerializeField] private GameObject _menuPage;
         [SerializeField] private GameObject _settingPage;
 
+        [SerializeField] private ConfigData _configData; 
+
         private void Awake()
         {
             SetAllButtonListener();
         }
 
         private void SetBackButtonListener(UnityAction listener) => SetButtonListener(_backButton, OnClickBackButton);
+        private void SetSfxButtonListener(UnityAction listener) => SetButtonListener(_sfxButton, OnClickSfxButton);
+        private void SetBgmButtonListener(UnityAction listener) => SetButtonListener(_bgmButton, OnClickBgmButton);
 
         public void SetButtonListener(Button button, UnityAction listener)
         {
@@ -35,23 +40,27 @@ namespace PaintAstic.Scene.MainMenu
             _menuPage.SetActive(true);
         }
 
-
         private void OnClickSfxButton()
-        {
-            // TODO: @faisal
+        {     
+            EventManager.TriggerEvent("SwitchSfxValueMessage");
+            UpdateSfxState(_configData.isSfxOn);
         }
 
         private void OnClickBgmButton()
         {
             // TODO: @faisal
+            EventManager.TriggerEvent("SwitchBgmValueMessage");
+            UpdateBgmState(_configData.isBgmOn);
         }
 
-        public void UpdateSfxState(bool isMuted) => _textSfx.SetText($"SFX {(isMuted ? "Off" : "On")}"); 
-        public void UpdateBgmState(bool isMuted) => _textBgm.SetText($"BGM {(isMuted ? "Off" : "On")}"); 
+        public void UpdateSfxState(bool isMuted) => _textSfx.SetText($"Sfx {(isMuted ? "On" : "Off")}"); 
+        public void UpdateBgmState(bool isMuted) => _textBgm.SetText($"Bgm {(isMuted ? "On" : "Off")}"); 
         
         public void SetAllButtonListener()
         {
             SetBackButtonListener(OnClickBackButton);
+            SetSfxButtonListener(OnClickSfxButton);
+            SetBgmButtonListener(OnClickBgmButton);
         }
     }
 }
