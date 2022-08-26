@@ -6,13 +6,13 @@ namespace PaintAstic.Module.Message
 {
     public struct MoveMessage
     {
-        public Vector3 _move { get; }
-        public int _playerId { get; }
+        public Vector3 move { get; }
+        public int playerId { get; }
 
-        public MoveMessage(Vector3 move, int playerId)
+        public MoveMessage(Vector3 _move, int _playerId)
         {
-            _move = move;
-            _playerId = playerId;
+            move = _move;
+            playerId = _playerId;
         }
     }
 }

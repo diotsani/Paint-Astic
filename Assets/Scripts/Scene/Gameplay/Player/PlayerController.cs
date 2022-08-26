@@ -1,17 +1,17 @@
 using PaintAstic.Global;
 using PaintAstic.Module.Message;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace PaintAstic.Module.Player
 {
     public class PlayerController : MonoBehaviour
     {
         private float _smoothSpeed = 1;
+        private float _timer = 0;
         public int playerIndex { get; set; }
-        private int _currentX;
-        private int _currentZ;
+        public int currentX { get; private set; }
+        public int currentZ { get; private set; }
+        public Vector3 lerpPos { get; set; }
 
         private Vector3 _movement;
         private Vector3 _desiredPosition;
@@ -20,34 +20,41 @@ namespace PaintAstic.Module.Player
         public void Move(Vector3 move)
         {
             _movement = move;
-            if(_movement == Vector3.left && _currentX == 0)
+            if (_movement == Vector3.left && currentX == 0)
             {
                 return;
             }
-            if (_movement == Vector3.right && _currentX == 7)
+            if (_movement == Vector3.right && currentX == 7)
             {
                 return;
             }
-            if (_movement == Vector3.forward && _currentZ == 7)
+            if (_movement == Vector3.forward && currentZ == 7)
             {
                 return;
             }
-            if (_movement == Vector3.back && _currentZ == 0)
+            if (_movement == Vector3.back && currentZ == 0)
             {
                 return;
             }
-
             _desiredPosition = transform.position + _movement;
+
             _smoothPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
-            transform.position = _smoothPosition;
+            _timer += Time.deltaTime;
+
+            if (_timer >= 0.4f)
+            {
+                _timer = 0;
+                transform.position = _smoothPosition;
+            }
+            
         }
         private void OnCollisionStay(Collision collision)
         {
             if(collision.gameObject.CompareTag("Tile"))
             {
-                _currentX = collision.gameObject.GetComponent<Tile>().tileIndexX;
-                _currentZ = collision.gameObject.GetComponent<Tile>().tileIndexZ;
-                EventManager.TriggerEvent("SetColor", new SetColorMessage(playerIndex, _currentX, _currentZ));
+                currentX = collision.gameObject.GetComponent<Tile>().tileIndexX;
+                currentZ = collision.gameObject.GetComponent<Tile>().tileIndexZ;
+                EventManager.TriggerEvent("SetColor", new SetColorMessage(playerIndex, currentX, currentZ));
             }
         }
     }
