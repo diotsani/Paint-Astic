@@ -1,4 +1,5 @@
 using PaintAstic.Global;
+using PaintAstic.Module.GridSystem;
 using PaintAstic.Scene.Gameplay.Items;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,9 +12,8 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
         [SerializeField] private ItemCollectPoint _collectPointPrefab;
         [SerializeField] private ItemBomb _bombPrefab;
 
-        [SerializeField] private int _spawnRadiusX = 8;
-        [SerializeField] private int _spawnRadiusZ = 8;
-        [SerializeField] private float _spawnDelay = 3f;
+        [SerializeField] PlayingGrid _gridManager;
+        [SerializeField] private float _spawnDelay = 2f;
 
         private bool _isRunning;
         private float _spawnDelayTimer;
@@ -93,10 +93,10 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
 
         private void ConfigSpawnedItem(BaseItem baseItem)
         {
-            baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 2, Random.Range(0, _spawnRadiusZ));
+            baseItem.transform.position = new Vector3(Random.Range(0, _gridManager.row), 2, Random.Range(0, _gridManager.column));
             while ((baseItem.transform.position.x == _prevX) && (baseItem.transform.position.z == _prevZ))
             {
-                baseItem.transform.position = new Vector3(Random.Range(0, _spawnRadiusX), 2, Random.Range(0, _spawnRadiusZ));
+                baseItem.transform.position = new Vector3(Random.Range(0, _gridManager.row), 2, Random.Range(0, _gridManager.column));
             }
             _prevX = (int)baseItem.transform.position.x;
             _prevZ = (int)baseItem.transform.position.z;

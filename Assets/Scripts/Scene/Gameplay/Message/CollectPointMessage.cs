@@ -1,18 +1,20 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PaintAstic.Module.Message
 {
-    public struct AddPointMessage
+    public struct CollectPointMessage
     {
         public int indexPlayer { get; }
-        public int amountPoint { get; }
         public bool isDoublePoint { get; }
-        public AddPointMessage(int IndexPlayer, int AmountPoint, bool IsDoublePoint)
+
+        public CollectPointMessage(int IndexPlayer, bool IsDoublePoint)
         {
             indexPlayer = IndexPlayer;
-            amountPoint = AmountPoint;
             isDoublePoint = IsDoublePoint;
         }
     }
+
 }
+

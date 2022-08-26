@@ -4,14 +4,21 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using PaintAstic.Module.Tiles;
+using PaintAstic.Module.GridSystem;
 
 namespace PaintAstic.Module.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private PlayingGrid _gridManager;
+
         private float _smoothSpeed = 1;
-        private float _intervalMove = 0.5f;
-        private float _timer = 0;
+        private float _intervalMove = 0.2f;
+        private float _timerIsMovable = 0;
+        private float _timerLastCollectPoint = 0;
+        private float _intervalLastCollectPoint = 7f;
+
+        public bool isDoublePoint = true;
         public int playerIndex { get; set; }
         public int currentX { get; private set; }
         public int currentZ { get; private set; }
@@ -25,11 +32,17 @@ namespace PaintAstic.Module.Player
 
         private void Update()
         {
-            _timer += Time.deltaTime;
+            _timerIsMovable += Time.deltaTime;
+            _timerLastCollectPoint += Time.deltaTime;
 
-            if(_timer > _intervalMove)
+            if(_timerIsMovable > _intervalMove)
             {
                 isMovable = true;
+            }
+
+            if (_timerLastCollectPoint > _intervalLastCollectPoint)
+            {
+                isDoublePoint = false;
             }
         }
 
@@ -42,11 +55,11 @@ namespace PaintAstic.Module.Player
                 {
                     return;
                 }
-                if (_movement == Vector3.right && currentX == 7)
+                if (_movement == Vector3.right && currentX == _gridManager.row - 1)
                 {
                     return;
                 }
-                if (_movement == Vector3.forward && currentZ == 7)
+                if (_movement == Vector3.forward && currentZ == _gridManager.column - 1)
                 {
                     return;
                 }
@@ -60,7 +73,8 @@ namespace PaintAstic.Module.Player
 
                 transform.position = _smoothPosition;
                 isMovable = false;
-                _timer = 0;
+                _timerIsMovable = 0;
+                EventManager.TriggerEvent("PlayMoveMessage");
             }
             
         }
@@ -72,6 +86,17 @@ namespace PaintAstic.Module.Player
                 currentZ = collision.gameObject.GetComponent<Tile>().tileIndexZ;
                 EventManager.TriggerEvent("SetColor", new SetColorMessage(playerIndex, currentX, currentZ));
             }
+        }
+
+        public void SetDependencies(PlayingGrid playingGrid)
+        {
+            _gridManager = playingGrid;
+        }
+
+        public void ResetLastCollectPoint()
+        {
+            _timerLastCollectPoint = 0;
+            isDoublePoint = true;
         }
     }
 }

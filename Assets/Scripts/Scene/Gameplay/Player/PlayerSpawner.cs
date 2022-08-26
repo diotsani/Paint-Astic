@@ -12,7 +12,7 @@ namespace PaintAstic.Module.Player
         [SerializeField] private PlayerController _player;
         [SerializeField] private PlayingGrid _playingGrid;
 
-        public int _maxPlayer { get;} = 2;
+        public int _maxPlayer { get;} = 3;
 
         private List<PlayerController> _pooledPlayers;
         private List<Vector3> _spawnPos;
@@ -22,11 +22,14 @@ namespace PaintAstic.Module.Player
         private void OnEnable()
         {
             EventManager.StartListening("Move", MovePlayer);
+            EventManager.StartListening("ResetLastCollectPointMessage", ResetLastCollectPoint);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening("Move", MovePlayer);
+            EventManager.StopListening("ResetLastCollectPointMessage", ResetLastCollectPoint);
+
         }
 
         void Start()
@@ -40,9 +43,9 @@ namespace PaintAstic.Module.Player
         void SetPosition()
         {
             _spawnPos.Add(_playingGrid.gridList[0, 0].transform.position);
-            _spawnPos.Add(_playingGrid.gridList[_playingGrid._height - 1, _playingGrid._width -1].transform.position);
-            _spawnPos.Add(_playingGrid.gridList[_playingGrid._height - 1, 0].transform.position);
-            _spawnPos.Add(_playingGrid.gridList[0, _playingGrid._width - 1].transform.position);
+            _spawnPos.Add(_playingGrid.gridList[_playingGrid.row - 1, _playingGrid.column -1].transform.position);
+            _spawnPos.Add(_playingGrid.gridList[_playingGrid.row - 1, 0].transform.position);
+            _spawnPos.Add(_playingGrid.gridList[0, _playingGrid.column - 1].transform.position);
 
             SpawnPlayer();
         }
@@ -58,13 +61,20 @@ namespace PaintAstic.Module.Player
         {
             for (int i = 0; i < _maxPlayer; i++)
             {
-                var spawnPos = new Vector3(_spawnPos[i].x , 5 , _spawnPos[i].z);
+                var spawnPos = new Vector3(_spawnPos[i].x , 1.99f , _spawnPos[i].z);
                 
                 PlayerController player = Instantiate(_player, spawnPos, Quaternion.identity, transform);
                 player.playerIndex = i;
+                player.SetDependencies(_playingGrid);
 
                 _pooledPlayers.Add(player);
             }
+        }
+
+        void ResetLastCollectPoint(object index)
+        {
+            int playerIndex = (int)index;
+            _pooledPlayers[playerIndex].ResetLastCollectPoint();
         }
     }
 }

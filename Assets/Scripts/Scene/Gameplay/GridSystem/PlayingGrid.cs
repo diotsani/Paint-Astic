@@ -10,8 +10,8 @@ namespace PaintAstic.Module.GridSystem
 {
     public class PlayingGrid : MonoBehaviour
     {
-        public int _height { get; private set; } = 8;
-        public int _width { get; private set; } = 8;
+        public int row { get; private set; } = 8;
+        public int column { get; private set; } = 8;
         private float _gridSpace = 1f;
         [SerializeField] private Tile gridPrefab;
         public Vector3 gridOrigin = Vector3.zero;
@@ -54,10 +54,10 @@ namespace PaintAstic.Module.GridSystem
         }
         private void CreateGrid()
         {
-            gridList = new Tile[_height, _width];
-            for (int x = 0; x < _height; x++)
+            gridList = new Tile[row, column];
+            for (int x = 0; x < row; x++)
             {
-                for (int z = 0; z < _width; z++)
+                for (int z = 0; z < column; z++)
                 {
                     Vector3 spawnPosition = new Vector3(x * _gridSpace, 0, z * _gridSpace) + gridOrigin;
                     Tile gridObjects = Instantiate(gridPrefab, spawnPosition, Quaternion.identity, transform);
@@ -74,28 +74,28 @@ namespace PaintAstic.Module.GridSystem
 
         public void GetScoreCollect(object indexPlayer)
         {
-            int index = (int)indexPlayer;
-            for (int x = 0; x < _height; x++)
+            CollectPointMessage message = (CollectPointMessage)indexPlayer;
+            for (int x = 0; x < row; x++)
             {
-                for (int z = 0; z < _width; z++)
+                for (int z = 0; z < column; z++)
                 {
-                    if (gridList[x, z]._tileIndexColor == index + 1)
+                    if (gridList[x, z]._tileIndexColor == message.indexPlayer + 1)
                     {
                         _amountColorTile++;
                         gridList[x, z].DefaultColors();
                     }
                 }
             }
-            EventManager.TriggerEvent("AddPoint", new AddPointMessage(index, _amountColorTile));
+            EventManager.TriggerEvent("AddPoint", new AddPointMessage(message.indexPlayer, _amountColorTile, message.isDoublePoint));
             _amountColorTile = 0;
         }
 
         public void RevertTiles(object indexPlayer)
         {
             int index = (int)indexPlayer;
-            for (int x = 0; x < _height; x++)
+            for (int x = 0; x < row; x++)
             {
-                for (int z = 0; z < _width; z++)
+                for (int z = 0; z < column; z++)
                 {
                     if (gridList[x, z]._tileIndexColor == index + 1)
                     {

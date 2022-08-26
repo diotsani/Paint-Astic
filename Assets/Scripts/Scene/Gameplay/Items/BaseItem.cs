@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace PaintAstic.Scene.Gameplay.Items
 {
-    public abstract class BaseItem : MonoBehaviour, ICollidable
+    public abstract class BaseItem : MonoBehaviour
     {
         [SerializeField] protected float _despawnDelay = 6f;
         protected float _despawnDelayTimer;
@@ -34,14 +34,7 @@ namespace PaintAstic.Scene.Gameplay.Items
             }
         }
 
-        protected void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                int targetPlayerIndex = other.gameObject.GetComponent<PlayerController>().playerIndex;
-                OnCollided(targetPlayerIndex);
-            }
-        }
+        
 
         private void OnGamePause()
         {
@@ -53,7 +46,6 @@ namespace PaintAstic.Scene.Gameplay.Items
             Time.timeScale = 1f;
         }
 
-        public abstract void OnCollided(int playerIndex);
     }
 
 }

@@ -33,14 +33,14 @@ namespace PaintAstic.Global.GameAudio
         {
             EventManager.StartListening("CollectedMessage", _onCollectPoint);
             EventManager.StartListening("BombMessage", _onBomb);
-            EventManager.StartListening("Move", _onPlayerMove);
+            EventManager.StartListening("PlayMoveMessage", _onPlayerMove);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening("CollectedMessage", _onCollectPoint);
             EventManager.StopListening("BombMessage", _onBomb);
-            EventManager.StopListening("Move", _onPlayerMove);
+            EventManager.StopListening("PlayMoveMessage", _onPlayerMove);
         }
 
         private void Update()
