@@ -12,7 +12,7 @@ namespace PaintAstic.Module.Tiles
         public int tileIndexZ { get; private set; }
 
         private Color defaultColor = Color.gray;
-        [SerializeField] private Color[] playerColor = { Color.red, Color.yellow, Color.green, Color.black };
+        [SerializeField] private Color[] playerColor = { Color.red, Color.yellow, Color.green, Color.blue };
 
         public int _tileIndexColor { get; private set; }
         public bool isStepped = false;
