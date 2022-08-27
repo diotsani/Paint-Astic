@@ -17,11 +17,12 @@ namespace PaintAstic.Scene.MainMenu
         [SerializeField] private GameObject _menuPage;
         [SerializeField] private GameObject _settingPage;
 
-        [SerializeField] private ConfigData _configData; 
+        [SerializeField] private ConfigData _configData;
 
         private void Awake()
         {
             SetAllButtonListener();
+            LoadAllState();
         }
 
         private void SetBackButtonListener(UnityAction listener) => SetButtonListener(_backButton, OnClickBackButton);
@@ -41,26 +42,32 @@ namespace PaintAstic.Scene.MainMenu
         }
 
         private void OnClickSfxButton()
-        {     
+        {
             EventManager.TriggerEvent("SwitchSfxValueMessage");
             UpdateSfxState(_configData.isSfxOn);
         }
 
         private void OnClickBgmButton()
         {
-            // TODO: @faisal
             EventManager.TriggerEvent("SwitchBgmValueMessage");
             UpdateBgmState(_configData.isBgmOn);
         }
 
-        public void UpdateSfxState(bool isMuted) => _textSfx.SetText($"Sfx {(isMuted ? "On" : "Off")}"); 
-        public void UpdateBgmState(bool isMuted) => _textBgm.SetText($"Bgm {(isMuted ? "On" : "Off")}"); 
-        
+        public void UpdateSfxState(bool isMuted) => _textSfx.SetText($"Sfx {(isMuted ? "On" : "Off")}");
+        public void UpdateBgmState(bool isMuted) => _textBgm.SetText($"Bgm {(isMuted ? "On" : "Off")}");
+
+        public void LoadAllState()
+        {
+            UpdateSfxState(_configData.isSfxOn);
+            UpdateBgmState(_configData.isBgmOn);
+        }
+
         public void SetAllButtonListener()
         {
             SetBackButtonListener(OnClickBackButton);
             SetSfxButtonListener(OnClickSfxButton);
             SetBgmButtonListener(OnClickBgmButton);
         }
+
     }
 }
