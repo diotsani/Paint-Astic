@@ -9,17 +9,6 @@ namespace PaintAstic.Scene.Gameplay.Items
 {
     public class ItemCollectPoint : BaseItem
     {
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                PlayerController player = other.gameObject.GetComponent<PlayerController>();
-                int targetPlayerIndex = player.playerIndex;
-                bool isDouble = player.isDoublePoint;
-                OnCollided(targetPlayerIndex, isDouble);
-            }
-        }
-
         public void OnCollided(int playerIndex, bool isDouble)
         {
             EventManager.TriggerEvent("CollectPointMessage", new CollectPointMessage(playerIndex,isDouble));

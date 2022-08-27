@@ -17,8 +17,6 @@ namespace PaintAstic.Module.Player
         private List<PlayerController> _pooledPlayers;
         private List<Vector3> _spawnPos;
 
-
-
         private void OnEnable()
         {
             EventManager.StartListening("Move", MovePlayer);
@@ -61,12 +59,17 @@ namespace PaintAstic.Module.Player
         {
             for (int i = 0; i < _maxPlayer; i++)
             {
-                var spawnPos = new Vector3(_spawnPos[i].x , 1.99f , _spawnPos[i].z);
+                var spawnPos = new Vector3(_spawnPos[i].x , 0f , _spawnPos[i].z);
                 
                 PlayerController player = Instantiate(_player, spawnPos, Quaternion.identity, transform);
                 player.playerIndex = i;
                 player.SetDependencies(_playingGrid);
 
+                var tile = _playingGrid.gridList[(int)_spawnPos[i].x, (int)_spawnPos[i].z];
+                tile.isStepped = true;
+                tile.ChangeColors(i);
+
+                //config player data
                 _pooledPlayers.Add(player);
             }
         }

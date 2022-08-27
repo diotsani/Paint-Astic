@@ -6,10 +6,10 @@ namespace PaintAstic.Module.Message
 {
     public struct MoveMessage
     {
-        public Vector3 move { get; }
+        public Vector2Int move { get; }
         public int playerId { get; }
 
-        public MoveMessage(Vector3 _move, int _playerId)
+        public MoveMessage(Vector2Int _move, int _playerId)
         {
             move = _move;
             playerId = _playerId;

@@ -17,19 +17,19 @@ namespace PaintAstic.Module.Inputs
 
                 if (Input.GetKey(inputConfig.moveUp))
                 {
-                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.forward, i));
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector2Int.up, i));
                 }
                 if (Input.GetKey(inputConfig.moveDown))
                 {
-                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.back, i));
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector2Int.down, i));
                 }
                 if (Input.GetKey(inputConfig.moveLeft))
                 {
-                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.left, i));
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector2Int.left, i));
                 }
                 if (Input.GetKey(inputConfig.moveRight))
                 {
-                    EventManager.TriggerEvent("Move", new MoveMessage(Vector3.right, i));
+                    EventManager.TriggerEvent("Move", new MoveMessage(Vector2Int.right, i));
                 }
             }
         }
