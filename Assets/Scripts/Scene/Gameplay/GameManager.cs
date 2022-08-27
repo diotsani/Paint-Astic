@@ -19,19 +19,22 @@ namespace PaintAstic.Scene.Gameplay
             Tutorial
         }
 
-        private void OnEnable() {
-            EventManager.StartListening("ClickPlayButtonMessage", StartTheGame);
+        private void OnEnable()
+        {
+            EventManager.StartListening("ClickStartButtonMessage", StartTheGame);
+            EventManager.StartListening("CloseTutorialMessage", CloseTutorial);
         }
 
-        private void OnDisable() {
-            EventManager.StopListening("ClickPlayButtonMessage", StartTheGame);
+        private void OnDisable()
+        {
+            EventManager.StopListening("ClickStartButtonMessage", StartTheGame);
+            EventManager.StopListening("CloseTutorialMessage", CloseTutorial);
         }
 
         private void Awake()
         {
             Instance = this;
         }
-        
 
         void SetPageState(PageState state)
         {
@@ -52,12 +55,18 @@ namespace PaintAstic.Scene.Gameplay
             }
         }
 
-        // Temporary code for OnClick() PlayButton
         public void StartTheGame()
         {
             Debug.Log("Enjoy the game :D");
             SetPageState(PageState.Tutorial);
+            
         }
+        public void CloseTutorial()
+        {
+            Debug.Log("Close tutorial page!");
+            SetPageState(PageState.None);
+        }
+
     }
 }
 

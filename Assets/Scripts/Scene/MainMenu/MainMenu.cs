@@ -52,6 +52,11 @@ namespace PaintAstic.Scene.MainMenu
             SetSettingButtonListener(OnClickSettingButton);
             SetExitButtonListener(OnClickExitButton);
         }
+
+        public void OnClickBackButton()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

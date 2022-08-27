@@ -12,10 +12,6 @@ namespace PaintAstic.Scene.Gameplay.Setup
         [SerializeField] private Button[] _leftButton;
         [SerializeField] private Button[] _rigthButton;
 
-        int max = 2;
-
-        //private int tempIndex;
-
         private void Awake()
         {
             SetAllButtonListener();
@@ -56,7 +52,7 @@ namespace PaintAstic.Scene.Gameplay.Setup
 
         private void OnClickStartButton()
         {
-            EventManager.TriggerEvent("ClickPlayButtonMessage");
+            EventManager.TriggerEvent("ClickStartButtonMessage");
         }
 
         private void OnClickLeftButton(int indexButton)
@@ -70,6 +66,7 @@ namespace PaintAstic.Scene.Gameplay.Setup
             // TODO:@Abdul
             Debug.Log("Change Colors ");
         }
+
     }
 
 }
