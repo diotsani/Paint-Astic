@@ -12,6 +12,7 @@ namespace PaintAstic.Module.HUD
         [Header("Winner")]
         [SerializeField] private TextMeshProUGUI winPlayerText;
         [SerializeField] private TextMeshProUGUI winPlayerPointText;
+        [SerializeField] private Image panelGameOver;
 
         [SerializeField] private TextMeshProUGUI[] scorePlayerText;
         [SerializeField] private int[] playerName;
@@ -38,9 +39,12 @@ namespace PaintAstic.Module.HUD
         {
             WinnerMessage message = (WinnerMessage)winData;
             int WinPlayerName = message.playerIndex + 1;
-            winPlayerText.text = "Player " + WinPlayerName.ToString() + "WIN";
+            winPlayerText.text = "Player " + WinPlayerName.ToString() + " WIN";
             winPlayerPointText.text = "Your Point " + message.point.ToString();
 
+            panelGameOver.gameObject.SetActive(true);
+
+            Time.timeScale = 0;
         }
     }
 }

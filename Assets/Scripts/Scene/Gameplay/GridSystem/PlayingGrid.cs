@@ -87,6 +87,7 @@ namespace PaintAstic.Module.GridSystem
                 }
             }
             EventManager.TriggerEvent("AddPoint", new AddPointMessage(message.indexPlayer, _amountColorTile, message.isDoublePoint));
+            
             _amountColorTile = 0;
         }
 
