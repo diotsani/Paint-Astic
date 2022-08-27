@@ -14,7 +14,6 @@ namespace PaintAstic.Scene.MainMenu
         [SerializeField] private GameObject _settingPage;
         [SerializeField] private GameObject _menuPage;
 
-        
         private void Awake()
         {
             SetAllButtonListener();
@@ -29,7 +28,6 @@ namespace PaintAstic.Scene.MainMenu
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(listener);
         }
-
 
         private void OnClickPlayButton()
         {        

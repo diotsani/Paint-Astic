@@ -16,7 +16,6 @@ namespace PaintAstic.Module.GridSystem
         [SerializeField] private Tile gridPrefab;
         public Vector3 gridOrigin = Vector3.zero;
 
-        private List<GameObject> tileList = new List<GameObject>();
         public List<GameObject> getScore = new List<GameObject>();
         public Tile[,] gridList { get; private set; }
 
@@ -33,6 +32,7 @@ namespace PaintAstic.Module.GridSystem
             EventManager.StartListening("SetColor", SetColorTile);
             EventManager.StartListening("CollectPointMessage", GetScoreCollect);
             EventManager.StartListening("RevertTilesMessage", RevertTiles);
+            EventManager.StartListening("SendPlayerData", SetCondition);
 
         }
         private void OnDisable()
@@ -40,7 +40,18 @@ namespace PaintAstic.Module.GridSystem
             EventManager.StopListening("SetColor", SetColorTile);
             EventManager.StopListening("CollectPointMessage", GetScoreCollect);
             EventManager.StopListening("RevertTilesMessage", RevertTiles);
+            EventManager.StopListening("SendPlayerData", SetCondition);
         }
+
+        void SetCondition(object data)
+        {
+            PlayerDataMessage playerData = (PlayerDataMessage)data;
+            gridList[playerData.currentX, playerData.currentZ].isStepped = true;
+            gridList[playerData.lastX, playerData.lastZ].isStepped = false;
+
+            gridList[playerData.currentX, playerData.currentZ].ChangeColors(playerData.playerIndex);
+        }
+
         public void GetIndexTile(object indexTile)
         {
             TileIndexMessage tileIndexMessage = (TileIndexMessage)indexTile;
@@ -64,7 +75,6 @@ namespace PaintAstic.Module.GridSystem
 
                     gridList[x, z] = gridObjects;
 
-                    tileList.Add(gridObjects.gameObject);
                     gridObjects.gameObject.name = "Tile( " + ("X:" + x + " ,Z:" + z + " )");
                     gridObjects.DefaultColors();
                     gridObjects.SetIndexTile(x, z);
