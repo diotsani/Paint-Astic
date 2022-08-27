@@ -70,6 +70,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf7bd810b26db54da9e1012c5374d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 6743767407168415809, guid: 0b4c8e72d5797674f871013b30a4452d, type: 3}
+  _player: {fileID: -2492742461986605541, guid: 1b6f5c26f6dfa144b9ca201015bd5e52, type: 3}
   _playingGrid: {fileID: 0}
-  _maxPlayer: 2

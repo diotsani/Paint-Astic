@@ -46,6 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectPointPrefab: {fileID: 1823011988121784494, guid: 05b9f1617dd942d46b910f92eb74fc97, type: 3}
   _bombPrefab: {fileID: 5476229390385868389, guid: 9d42bfd0a06047c4cbb08f70671111c6, type: 3}
-  _spawnRadiusX: 8
-  _spawnRadiusZ: 8
+  _gridManager: {fileID: 0}
   _spawnDelay: 3

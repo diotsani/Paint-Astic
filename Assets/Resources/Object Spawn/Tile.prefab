@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 6800221448498901038}
   - component: {fileID: 4499124663315111070}
   - component: {fileID: 1876613875046990991}
-  - component: {fileID: 6097921797995733495}
-  - component: {fileID: -102226524954988645}
-  - component: {fileID: 1721943733397010987}
   - component: {fileID: 7862353886397275842}
   m_Layer: 0
   m_Name: Tile
