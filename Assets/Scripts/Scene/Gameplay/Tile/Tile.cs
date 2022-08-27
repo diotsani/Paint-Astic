@@ -15,6 +15,7 @@ namespace PaintAstic.Module.Tiles
         [SerializeField] private Color[] playerColor = { Color.red, Color.yellow, Color.green, Color.black };
 
         public int _tileIndexColor { get; private set; }
+        public bool isStepped = false;
         public void SetIndexTile(int tileIndexX, int tileIndexZ)
         {
             this.tileIndexX = tileIndexX;
