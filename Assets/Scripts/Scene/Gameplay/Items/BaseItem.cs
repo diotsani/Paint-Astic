@@ -13,6 +13,8 @@ namespace PaintAstic.Scene.Gameplay.Items
 
         public int itemIndexX { get; set; }
         public int itemIndexZ { get; set; }
+        public int maxX { get; set; }
+        public int maxZ { get; set; }
 
         protected void OnEnable()
         {
@@ -33,6 +35,7 @@ namespace PaintAstic.Scene.Gameplay.Items
             if (_despawnDelayTimer > _despawnDelay)
             {
                 gameObject.SetActive(false);
+                ResetIndex();
                 _despawnDelayTimer = 0f;
             }
         }
@@ -49,10 +52,10 @@ namespace PaintAstic.Scene.Gameplay.Items
             Time.timeScale = 1f;
         }
 
-        public void ResetIndex(int MaxX, int MaxZ)
+        public void ResetIndex()
         {
-            itemIndexX = MaxX;
-            itemIndexZ = MaxZ;
+            itemIndexX = maxX;
+            itemIndexZ = maxZ;
         }
 
     }
