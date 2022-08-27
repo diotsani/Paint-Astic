@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 16f7e8bf56abe854ab72a9f67a9aca27, type: 2}
+  - {fileID: 2100000, guid: adc0810849d42b646bca0c4e0094190e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,10 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7fb8fe3e9848a04bb8ed1ed58741746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveUp: 119
-  _moveDown: 115
-  _moveLeft: 97
-  _moveRight: 100
+  _inputConfigs: []
 --- !u!114 &6743767407168415809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,4 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e267de2377a1742870ffe4b4bdd015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementUnit: 1
+  _gridManager: {fileID: 0}
+  isDoublePoint: 1

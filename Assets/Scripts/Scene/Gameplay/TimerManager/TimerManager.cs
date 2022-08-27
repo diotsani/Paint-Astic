@@ -15,15 +15,15 @@ namespace PaintAstic.Module.Timer
 
         private void OnEnable()
         {
-            EventManager.StartListening("PlayGameMessage", IsPlayGame);
-            EventManager.StartListening("PauseGameMessage", OnGamePause);
-            EventManager.StartListening("ContinueGameMessage", OnGameContinue);
+            EventManager.StartListening("GameStartMessage", IsPlayGame);
+            EventManager.StartListening("OnGamePauseMessage", OnGamePause);
+            EventManager.StartListening("OnGameContinueMessage", OnGameContinue);
         }
         private void OnDisable()
         {
-            EventManager.StopListening("PlayGameMessage", IsPlayGame);
-            EventManager.StopListening("PauseGameMessage", OnGamePause);
-            EventManager.StopListening("ContinueGameMessage", OnGameContinue);
+            EventManager.StopListening("GameStartMessage", IsPlayGame);
+            EventManager.StopListening("OnGamePauseMessage", OnGamePause);
+            EventManager.StopListening("OnGameContinueMessage", OnGameContinue);
         }
         private void Update()
         {
