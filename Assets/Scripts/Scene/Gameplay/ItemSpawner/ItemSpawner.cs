@@ -13,7 +13,7 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
         [SerializeField] private ItemCollectPoint _collectPointPrefab;
         [SerializeField] private ItemBomb _bombPrefab;
 
-        [SerializeField] PlayingGrid _gridManager;
+        [SerializeField] private PlayingGrid _gridManager;
         [SerializeField] private float _spawnDelay = 2f;
 
         private bool _isRunning;
@@ -128,6 +128,7 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
                 if (_collectPointPool[i].itemIndexX == playerData.currentX && _collectPointPool[i].itemIndexZ == playerData.currentZ)
                 {
                     _collectPointPool[i].OnCollided(playerData.playerIndex, playerData.isDoublePoint);
+                    _collectPointPool[i].ResetIndex(_gridManager.row, _gridManager.column);
                 }
             }
             for (int i = 0; i < _bombPool.Count; i++)
@@ -135,6 +136,7 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
                 if (_bombPool[i].itemIndexX == playerData.currentX && _bombPool[i].itemIndexZ == playerData.currentZ)
                 {
                     _bombPool[i].OnCollided(playerData.playerIndex);
+                    _bombPool[i].ResetIndex(_gridManager.row, _gridManager.column);
                 }
             }
         }
