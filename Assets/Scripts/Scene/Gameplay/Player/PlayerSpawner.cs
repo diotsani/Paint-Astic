@@ -1,7 +1,6 @@
 using PaintAstic.Global;
 using PaintAstic.Module.GridSystem;
 using PaintAstic.Module.Message;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace PaintAstic.Module.Player
         [SerializeField] private PlayerController _player;
         [SerializeField] private PlayingGrid _playingGrid;
 
-        [SerializeField]public int _maxPlayer { get;} = 2;
+        [SerializeField] public int _maxPlayer { get; } = 2;
 
         private List<PlayerController> _pooledPlayers;
         private List<Vector3> _spawnPos;
@@ -20,12 +19,14 @@ namespace PaintAstic.Module.Player
         private void OnEnable()
         {
             EventManager.StartListening("Move", MovePlayer);
+            EventManager.StartListening("UpdateColor", SpawnPlayer);
             EventManager.StartListening("ResetLastCollectPointMessage", ResetLastCollectPoint);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening("Move", MovePlayer);
+            EventManager.StopListening("UpdateColor", SpawnPlayer);
             EventManager.StopListening("ResetLastCollectPointMessage", ResetLastCollectPoint);
 
         }
@@ -41,11 +42,10 @@ namespace PaintAstic.Module.Player
         void SetPosition()
         {
             _spawnPos.Add(_playingGrid.gridList[0, 0].transform.position);
-            _spawnPos.Add(_playingGrid.gridList[_playingGrid.row - 1, _playingGrid.column -1].transform.position);
+            _spawnPos.Add(_playingGrid.gridList[_playingGrid.row - 1, _playingGrid.column - 1].transform.position);
             _spawnPos.Add(_playingGrid.gridList[_playingGrid.row - 1, 0].transform.position);
             _spawnPos.Add(_playingGrid.gridList[0, _playingGrid.column - 1].transform.position);
 
-            SpawnPlayer();
         }
 
         void MovePlayer(object data)
@@ -55,23 +55,27 @@ namespace PaintAstic.Module.Player
             _pooledPlayers[moveMessage.playerId].Move(moveMessage.move);
         }
 
-        void SpawnPlayer()
+        void SpawnPlayer(object data)
         {
-            for (int i = 0; i < _maxPlayer; i++)
-            {
-                var spawnPos = new Vector3(_spawnPos[i].x , 0f , _spawnPos[i].z);
-                
-                PlayerController player = Instantiate(_player, spawnPos, Quaternion.identity, transform);
-                player.playerIndex = i;
-                player.SetDependencies(_playingGrid);
+            //for (int i = 0; i < _maxPlayer; i++)
+            //{
+            UpdateColorMessage updateColor = (UpdateColorMessage)data;
+            int player = updateColor.playerIndex;
+            Color color = updateColor.colorIndex;
+            var spawnPos = new Vector3(_spawnPos[player].x, 0f, _spawnPos[player].z);
 
-                var tile = _playingGrid.gridList[(int)_spawnPos[i].x, (int)_spawnPos[i].z];
-                tile.isStepped = true;
-                tile.ChangeColors(i);
+            PlayerController players = Instantiate(_player, spawnPos, Quaternion.identity, transform);
+            players.playerIndex = player;
+            players.SetDependencies(_playingGrid);
+            players.ChangePlayerColor(color);
 
-                //config player data
-                _pooledPlayers.Add(player);
-            }
+            var tile = _playingGrid.gridList[(int)_spawnPos[player].x, (int)_spawnPos[player].z];
+            tile.isStepped = true;
+            tile.ChangeColors(player);
+
+            //config player data
+            _pooledPlayers.Add(players);
+            //}
         }
 
         void ResetLastCollectPoint(object index)

@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectColorMenu : MonoBehaviour
+namespace PaintAstic.Module.Colors
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SelectColorMenu : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private List<Color> listColors;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public List<Color> ListColors => listColors;
+
+        private void Reset()
+        {
+            listColors = new List<Color>();
+            listColors.Add(Color.red);
+            listColors.Add(Color.cyan);
+            listColors.Add(Color.blue);
+            listColors.Add(Color.yellow);
+        }
     }
 }

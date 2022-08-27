@@ -46,9 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gridManager: {fileID: 0}
-  isDoublePoint: 1
-  currentPlayerPos: {x: 0, y: 0, z: 0}
-  lastPlayerPos: {x: 0, y: 0, z: 0}
+  _mesh: {fileID: 8113831623796646374}
 --- !u!1001 &3246165580026972632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +98,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6743767407168415806, guid: 0b4c8e72d5797674f871013b30a4452d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: adc0810849d42b646bca0c4e0094190e, type: 2}
     - target: {fileID: 6743767407168415810, guid: 0b4c8e72d5797674f871013b30a4452d, type: 3}
       propertyPath: m_Name
       value: Sphere
@@ -109,5 +111,10 @@ PrefabInstance:
 --- !u!4 &8113831623796646372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6743767407168415804, guid: 0b4c8e72d5797674f871013b30a4452d, type: 3}
+  m_PrefabInstance: {fileID: 3246165580026972632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8113831623796646374 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6743767407168415806, guid: 0b4c8e72d5797674f871013b30a4452d, type: 3}
   m_PrefabInstance: {fileID: 3246165580026972632}
   m_PrefabAsset: {fileID: 0}
