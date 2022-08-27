@@ -100,7 +100,7 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
             while (((baseItem.transform.position.x == _prevX) && (baseItem.transform.position.z == _prevZ)) || 
                 _gridManager.gridList[(int)baseItem.transform.position.x, (int)baseItem.transform.position.z].isStepped)
             {
-                baseItem.transform.position = new Vector3(Random.Range(0, _gridManager.row), 2, Random.Range(0, _gridManager.column));
+                baseItem.transform.position = new Vector3(Random.Range(0, _gridManager.row), 1, Random.Range(0, _gridManager.column));
             }
             _prevX = (int)baseItem.transform.position.x;
             _prevZ = (int)baseItem.transform.position.z;

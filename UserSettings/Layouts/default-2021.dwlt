@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 311
     height: 947
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 500, y: 200}
   m_MaxSize: {x: 40480, y: 16192}
   vertical: 0
-  controlID: 946
+  controlID: 111
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 777
+  controlID: 143
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 796
+  controlID: 18
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -295,8 +295,8 @@ MonoBehaviour:
     y: 0
     width: 777
     height: 418
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -438,22 +438,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Prefabs/ItemSpawner
+    - Assets/Resources/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Prefabs/ItemSpawner
+  - Assets/Resources/Prefabs/Main Menu
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\GameDev\Kelompok5-Tugas5
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d6900000
-    m_LastClickedID: 37078
-    m_ExpandedIDs: 00000000d6800000d8800000dc800000ea800000ec80000048810000888a000000ca9a3b
+    m_SelectedIDs: fa5d0000
+    m_LastClickedID: 24058
+    m_ExpandedIDs: 00000000845d0000865d0000885d0000fa5d0000045e0000185f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -481,7 +481,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000845d0000865d0000885d00008a5d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -854,9 +854,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 5.8149157, y: 0.26355982, z: -0.6169262}
+    m_Target: {x: -2.074854, y: -0.5563281, z: 3.5818102}
     speed: 2
-    m_Value: {x: 5.8149157, y: 0.26355982, z: -0.6169262}
+    m_Value: {x: -2.074854, y: -0.5563281, z: 3.5818102}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -903,13 +903,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.090828955, y: 0.8059509, z: -0.1282517, w: -0.5707641}
+    m_Target: {x: 0.11742228, y: -0.6766068, z: 0.11057841, w: 0.71847075}
     speed: 2
-    m_Value: {x: -0.09187782, y: 0.8048899, z: -0.12932108, w: -0.5718276}
+    m_Value: {x: 0.11742155, y: -0.6766026, z: 0.110577725, w: 0.7184663}
   m_Size:
-    m_Target: 5.7549357
+    m_Target: 7.163289
     speed: 2
-    m_Value: 5.7549357
+    m_Value: 7.163289
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -965,23 +965,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 2a8c0000
-      m_LastClickedID: 35882
-      m_ExpandedIDs: 6831fffff631ffff5c32ffff7a34ffffe034ffff3035ffff8c50ffff1451ffffcc52ffff0654ffffae54ffff4e55fffff855ffff4856ffff60a4ffff3ed0ffff8cd0ffffdad0ffffdcd2fffff4ffffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 3a31ffffb635ffff4e36ffffeafaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: ParticleSpawner
+        m_OriginalName: ParticleSpawner
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -1976
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
