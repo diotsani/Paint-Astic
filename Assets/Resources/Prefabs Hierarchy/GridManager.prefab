@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd307e8280d42aa49aa8a6d39af6a8ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPrefab: {fileID: 7862353886397275842, guid: d16d19d3d8642cd4d863508b786aac0f, type: 3}
+  gridPrefab: {fileID: 8301644335789423375, guid: d16d19d3d8642cd4d863508b786aac0f, type: 3}
   gridOrigin: {x: 0, y: 0, z: 0}
   getScore: []
   _amountColorTile: 0
