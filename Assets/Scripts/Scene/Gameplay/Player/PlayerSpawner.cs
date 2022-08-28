@@ -11,10 +11,13 @@ namespace PaintAstic.Module.Player
         [SerializeField] private PlayerController _player;
         [SerializeField] private PlayingGrid _playingGrid;
 
-        public int _maxPlayer { get; } = 2;
+        [SerializeField] private int _maxPlayer = 2;
 
         private List<PlayerController> _pooledPlayers;
         private List<Vector3> _spawnPos;
+
+        public int maxPlayer => _maxPlayer;
+        public List<PlayerController> pooledPlayers => _pooledPlayers;
 
         private void OnEnable()
         {

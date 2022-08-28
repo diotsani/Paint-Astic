@@ -8,10 +8,11 @@ namespace PaintAstic.Module.Inputs
     public class InputManager : MonoBehaviour
     {
         [SerializeField] private InputConfig[] _inputConfigs;
-
+        [SerializeField] private PlayerSpawner _playerSpawn;
+        
         private void Update()
         {
-            for (int i = 0; i < _inputConfigs.Length; i++)
+            for (int i = 0; i < _playerSpawn.pooledPlayers.Count; i++)
             {
                 var inputConfig = _inputConfigs[i];
 
