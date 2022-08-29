@@ -7,6 +7,5 @@ namespace PaintAstic.Global
     {
         void SetButtonListener(Button button, UnityAction listener);
         void SetAllButtonListener();
-
     }
 }
