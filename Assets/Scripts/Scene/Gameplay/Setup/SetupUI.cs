@@ -103,6 +103,7 @@ namespace PaintAstic.Scene.Gameplay.Setup
             _colorImage[indexPlayer].color = _selectColorMenu.ListColors[indexColor];
             
         }
+
     }
 
 }
