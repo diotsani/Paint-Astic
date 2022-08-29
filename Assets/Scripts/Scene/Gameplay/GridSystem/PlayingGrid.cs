@@ -30,17 +30,19 @@ namespace PaintAstic.Module.GridSystem
         private void OnEnable()
         {
             EventManager.StartListening("SetColor", SetColorTile);
-            EventManager.StartListening("CollectPointMessage", GetScoreCollect);
-            EventManager.StartListening("RevertTilesMessage", RevertTiles);
+            EventManager.StartListening("UpdateColor", SetPlayerColor);
             EventManager.StartListening("SendPlayerData", SetCondition);
+            EventManager.StartListening("RevertTilesMessage", RevertTiles);
+            EventManager.StartListening("CollectPointMessage", GetScoreCollect);
 
         }
         private void OnDisable()
         {
             EventManager.StopListening("SetColor", SetColorTile);
-            EventManager.StopListening("CollectPointMessage", GetScoreCollect);
-            EventManager.StopListening("RevertTilesMessage", RevertTiles);
+            EventManager.StopListening("UpdateColor", SetPlayerColor);
             EventManager.StopListening("SendPlayerData", SetCondition);
+            EventManager.StopListening("RevertTilesMessage", RevertTiles);
+            EventManager.StopListening("CollectPointMessage", GetScoreCollect);
         }
 
         void SetCondition(object data)
@@ -62,6 +64,19 @@ namespace PaintAstic.Module.GridSystem
         {
             SetColorMessage colorIndex = (SetColorMessage)indexPlayer;
             gridList[colorIndex.playerXPos, colorIndex.playerZPos].ChangeColors(colorIndex.playerIndex);
+        }
+        public void SetPlayerColor(object data)
+        {
+            UpdateColorMessage colorMessage = (UpdateColorMessage)data;
+            Color newColor = colorMessage.colorIndex;
+
+            for (int x = 0; x < row; x++)
+            {
+                for (int z = 0; z < column; z++)
+                {
+                    gridList[x, z].SetColorTile(newColor);
+                }
+            }
         }
         private void CreateGrid()
         {

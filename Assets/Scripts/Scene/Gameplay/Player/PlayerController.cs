@@ -12,6 +12,7 @@ namespace PaintAstic.Module.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayingGrid _gridManager;
+        [SerializeField] private MeshRenderer _mesh; 
 
         private float _smoothSpeed = 1;
         private float _intervalMove = 0.2f;
@@ -22,7 +23,7 @@ namespace PaintAstic.Module.Player
         private int _maxZ;
 
         public bool isDoublePoint { get; private set; } = true;
-    public int playerIndex { get; set; }
+        public int playerIndex { get; set; }
         public int currentX { get; private set; }
         public int currentZ { get; private set; }
         public int lastX { get; private set; }
@@ -89,6 +90,11 @@ namespace PaintAstic.Module.Player
         public void SetDependencies(PlayingGrid playingGrid)
         {
             _gridManager = playingGrid;
+        }
+
+        public void ChangePlayerColor(Color color)
+        {
+            _mesh.material.color = color;
         }
 
         public void ResetLastCollectPoint()

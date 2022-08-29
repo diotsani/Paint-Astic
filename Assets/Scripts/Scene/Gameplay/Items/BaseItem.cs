@@ -8,11 +8,13 @@ namespace PaintAstic.Scene.Gameplay.Items
 {
     public abstract class BaseItem : MonoBehaviour
     {
-        [SerializeField]protected float _despawnDelay = 6f;
+        [SerializeField] protected float _despawnDelay = 6f;
         protected float _despawnDelayTimer;
 
         public int itemIndexX { get; set; }
         public int itemIndexZ { get; set; }
+        public int maxX { get; set; }
+        public int maxZ { get; set; }
 
         protected void OnEnable()
         {
@@ -33,11 +35,12 @@ namespace PaintAstic.Scene.Gameplay.Items
             if (_despawnDelayTimer > _despawnDelay)
             {
                 gameObject.SetActive(false);
+                ResetIndex();
                 _despawnDelayTimer = 0f;
             }
         }
 
-        
+
 
         private void OnGamePause()
         {
@@ -47,6 +50,12 @@ namespace PaintAstic.Scene.Gameplay.Items
         private void OnGameContinue()
         {
             Time.timeScale = 1f;
+        }
+
+        public void ResetIndex()
+        {
+            itemIndexX = maxX;
+            itemIndexZ = maxZ;
         }
 
     }

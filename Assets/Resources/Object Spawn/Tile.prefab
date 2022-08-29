@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6800221448498901038}
   - component: {fileID: 4499124663315111070}
   - component: {fileID: 1876613875046990991}
-  - component: {fileID: 7862353886397275842}
+  - component: {fileID: 8301644335789423375}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Tile
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7862353886397275842
+--- !u!114 &8301644335789423375
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,9 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d64514f3c837b44b31820a48fe73b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColor:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
+  playerColor: []
   isStepped: 0
