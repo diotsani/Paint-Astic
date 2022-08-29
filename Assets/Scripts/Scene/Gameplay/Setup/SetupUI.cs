@@ -63,7 +63,7 @@ namespace PaintAstic.Scene.Gameplay.Setup
 
         private void OnClickStartButton()
         {
-            EventManager.TriggerEvent("ClickPlayButtonMessage");
+            EventManager.TriggerEvent("ClickStartButtonMessage");
 
             for (int i = 0; i < 2; i++)
             {
