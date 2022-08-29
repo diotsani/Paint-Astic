@@ -25,6 +25,7 @@ namespace PaintAstic.Scene.Gameplay.Tutorial
         private void OnClickBackButton()
         {
             EventManager.TriggerEvent("CloseTutorialMessage");
+            EventManager.TriggerEvent("GameStartMessage");
         }
 
         public void SetAllButtonListener()

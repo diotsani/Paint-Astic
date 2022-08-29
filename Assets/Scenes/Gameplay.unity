@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -320,6 +320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialPage
       objectReference: {fileID: 0}
+    - target: {fileID: 4517337656551489164, guid: 9563117ceba79eb41b2f368073a001e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8697133180726989881, guid: 9563117ceba79eb41b2f368073a001e4, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -563,7 +567,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1677397259 stripped
 MonoBehaviour:
@@ -754,10 +758,6 @@ PrefabInstance:
     - target: {fileID: 8585902052574555174, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
       propertyPath: m_Name
       value: SetupPage
-      objectReference: {fileID: 0}
-    - target: {fileID: 8585902052574555174, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
@@ -1087,7 +1087,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7587142146566851488, guid: ba16f0dade51bfc4fb7eaa89d1abd51f, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7587142146566851488, guid: ba16f0dade51bfc4fb7eaa89d1abd51f, type: 3}
       propertyPath: m_LocalPosition.x
