@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -371,6 +371,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4517337656551489164, guid: 9563117ceba79eb41b2f368073a001e4, type: 3}
   m_PrefabInstance: {fileID: 1012153347}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1196372389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196372387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cde08297e63b404abfb172f78394095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backButton: {fileID: 2006727345}
 --- !u!1001 &1329173150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -587,6 +600,22 @@ PrefabInstance:
       propertyPath: _selectColorMenu
       value: 
       objectReference: {fileID: 508380183}
+    - target: {fileID: 2032933866, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
+      propertyPath: _colorImage.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032933866, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
+      propertyPath: _leftButton.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032933866, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
+      propertyPath: _rightButton.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032933866, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
+      propertyPath: _currentColor.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 584359649584366602, guid: 1f221b7fc225ef84f9b12306ce801f9a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -850,6 +879,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd92f923383de22449ac9c9c9036d010, type: 3}
+--- !u!114 &2006727345 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5655049063330202838, guid: 9563117ceba79eb41b2f368073a001e4, type: 3}
+  m_PrefabInstance: {fileID: 1012153347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2026555951
 PrefabInstance:
   m_ObjectHideFlags: 0
