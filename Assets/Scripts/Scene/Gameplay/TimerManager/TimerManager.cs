@@ -64,6 +64,7 @@ namespace PaintAstic.Module.Timer
         }
         void IsPlayGame()
         {
+            OnGameContinue();
             isPlayGame = true;
         }
     }
