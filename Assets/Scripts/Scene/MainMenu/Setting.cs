@@ -16,9 +16,6 @@ namespace PaintAstic.Scene.MainMenu
         [SerializeField] private TextMeshProUGUI _textBgm;
         [SerializeField] private GameObject _settingPage;
 
-        //[SerializeField] private ConfigData _configData;
-
-
         private void Awake()
         {
             SetAllButtonListener();
@@ -61,7 +58,7 @@ namespace PaintAstic.Scene.MainMenu
             UpdateBgmState(ConfigData.configInstance.isBgmOn);
         }
 
-        public void SetAllButtonListener()
+        public virtual void SetAllButtonListener()
         {
             SetBackButtonListener(OnClickBackButton);
             SetSfxButtonListener(OnClickSfxButton);

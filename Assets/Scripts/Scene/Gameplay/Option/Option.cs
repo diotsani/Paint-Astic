@@ -17,7 +17,13 @@ namespace PaintAstic.Module.Option
 
         private void Awake()
         {
-            SetAllButtonListener();
+            LoadAllState();
+            SetAllButtonListener();  
+        }
+
+        public override void SetAllButtonListener()
+        {
+            base.SetAllButtonListener();
             SetHomeButtonListener(OnClickHomeButton);
             SetRestartButtonListener(OnClickRestartButton);
         }
