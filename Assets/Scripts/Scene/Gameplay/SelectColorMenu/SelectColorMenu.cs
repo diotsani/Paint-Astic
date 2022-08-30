@@ -42,54 +42,48 @@ namespace PaintAstic.Module.Colors
 
         public void OnSelectLeft(int indexButton)
         {
-            if (_currentColor[indexButton] == 0)
+            int nextColor = _currentColor[indexButton];
+            nextColor--;
+
+            for (int i = 0; i < _currentColor.Length; i++)
             {
-                _currentColor[indexButton] = _listColors.Count - 1;
-            }
-            else
-            {
-                int nextColor;
-                _currentColor[indexButton]--;
-                nextColor = _currentColor[indexButton]--;
-                for (int i = 0; i < _currentColor.Length; i++)
+                if (nextColor < 0)
                 {
-                    if (nextColor == _currentColor[i])
+                    nextColor = _listColors.Count - 1;
+                }
+                if (nextColor == _currentColor[i])
+                {
+                    nextColor -= 1;
+                    if (nextColor < 0)
                     {
-                        nextColor -= 1;
-                        if (nextColor < 0)
-                        {
-                            nextColor = _listColors.Count - 1;
-                        }
+                        nextColor = _listColors.Count - 1;
                     }
                 }
-                _currentColor[indexButton] = nextColor;
             }
+            _currentColor[indexButton] = nextColor;
             OnChangeColor(indexButton, _currentColor[indexButton]);
         }
         public void OnSelectRight(int indexButton)
         {
-            if (_currentColor[indexButton] == _listColors.Count - 1)
+            int nextColor = _currentColor[indexButton];
+            nextColor++;
+
+            for (int i = 0; i < _currentColor.Length; i++)
             {
-                _currentColor[indexButton] = 0;
-            }
-            else
-            {
-                int nextColor;
-                _currentColor[indexButton]++;
-                nextColor = _currentColor[indexButton]++;
-                for (int i = 0; i < _currentColor.Length; i++)
+                if (nextColor > _listColors.Count - 1)
                 {
-                    if (nextColor == _currentColor[i])
+                    nextColor = 0;
+                }
+                if (nextColor == _currentColor[i])
+                {
+                    nextColor += 1;
+                    if (nextColor > _listColors.Count - 1)
                     {
-                        nextColor += 1;
-                        if (nextColor >= _listColors.Count - 1)
-                        {
-                            nextColor = 0;
-                        }
+                        nextColor = 0;
                     }
                 }
-                _currentColor[indexButton] = nextColor;
             }
+            _currentColor[indexButton] = nextColor;
             OnChangeColor(indexButton, _currentColor[indexButton]);
         }
 

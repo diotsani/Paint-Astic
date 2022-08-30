@@ -60,8 +60,6 @@ namespace PaintAstic.Module.Player
 
         void SpawnPlayer(object data)
         {
-            //for (int i = 0; i < _maxPlayer; i++)
-            //{
             UpdateColorMessage updateColor = (UpdateColorMessage)data;
             int player = updateColor.playerIndex;
             Color color = updateColor.colorIndex;
@@ -78,7 +76,6 @@ namespace PaintAstic.Module.Player
 
             //config player data
             _pooledPlayers.Add(players);
-            //}
         }
 
         void ResetLastCollectPoint(object index)

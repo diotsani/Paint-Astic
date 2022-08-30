@@ -25,6 +25,7 @@ namespace PaintAstic.Global
 
                     if (!eventManager)
                     {
+                        Destroy(eventManager.gameObject);
                         Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
                     }
                     else
