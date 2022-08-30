@@ -57,11 +57,6 @@ namespace PaintAstic.Scene.Gameplay.Setup
         private void OnClickStartButton()
         {
             EventManager.TriggerEvent("ClickStartButtonMessage");
-
-            for (int i = 0; i < 2; i++)
-            {
-                EventManager.TriggerEvent("UpdateColor", new UpdateColorMessage(i, _selectColorMenu.ListColors[_currentColor[i]]));
-            }
         }
     }
 }
