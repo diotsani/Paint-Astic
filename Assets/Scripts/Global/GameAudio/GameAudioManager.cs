@@ -33,6 +33,7 @@ namespace PaintAstic.Global.GameAudio
             else
             {
                 Destroy(gameObject);
+                return;
             }
             _onCollectPoint = new UnityAction(OnCollectPoint);
             _onBomb = new UnityAction(OnBomb);
@@ -53,12 +54,6 @@ namespace PaintAstic.Global.GameAudio
             EventManager.StopListening("PlayMoveMessage", _onPlayerMove);
         }
 
-        private void OnDestroy()
-        {
-            EventManager.StopListening("CollectedMessage", _onCollectPoint);
-            EventManager.StopListening("BombMessage", _onBomb);
-            EventManager.StopListening("PlayMoveMessage", _onPlayerMove);
-        }
 
         private void Update()
         {

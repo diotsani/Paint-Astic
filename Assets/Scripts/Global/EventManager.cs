@@ -63,6 +63,7 @@ namespace PaintAstic.Global
 
         public static void StartListening(string eventName, UnityAction listener)
         {
+            if (listener == null) return;
             UnityEvent thisEvent = null;
             if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
             {
@@ -78,6 +79,7 @@ namespace PaintAstic.Global
 
         public static void StartListening(string eventName, UnityAction<object> listener)
         {
+            if (listener == null) return;
             TypedEvent thisEvent = null;
             if (instance.typedEventDictionary.TryGetValue(eventName, out thisEvent))
             {
@@ -93,6 +95,7 @@ namespace PaintAstic.Global
 
         public static void StopListening(string eventName, UnityAction listener)
         {
+            if (listener == null) return;
             if (eventManager == null) return;
             UnityEvent thisEvent = null;
             if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
@@ -103,6 +106,7 @@ namespace PaintAstic.Global
 
         public static void StopListening(string eventName, UnityAction<object> listener)
         {
+            if (listener == null) return;
             if (eventManager == null) return;
             TypedEvent thisEvent = null;
             if (instance.typedEventDictionary.TryGetValue(eventName, out thisEvent))
