@@ -7,6 +7,8 @@ namespace PaintAstic.Global.Config
 {
     public class ConfigData : MonoBehaviour
     {
+        public static ConfigData configInstance;
+
         public bool isBgmOn { get; private set; }
         public bool isSfxOn { get; private set; }
         private UnityAction onSwitchBgmValue;
@@ -14,7 +16,17 @@ namespace PaintAstic.Global.Config
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            if (configInstance == null)
+            {
+                configInstance = this;
+                Debug.Log(configInstance);
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            Debug.Log(configInstance);
             onSwitchBgmValue = new UnityAction(ToggleMusic);
             onSwitchSfxValue = new UnityAction(ToggleEffect);
         }
@@ -29,6 +41,12 @@ namespace PaintAstic.Global.Config
         }
 
         private void OnDisable()
+        {
+            EventManager.StopListening("SwitchBgmValueMessage", onSwitchBgmValue);
+            EventManager.StopListening("SwitchSfxValueMessage", onSwitchSfxValue);
+        }
+
+        private void OnDestroy()
         {
             EventManager.StopListening("SwitchBgmValueMessage", onSwitchBgmValue);
             EventManager.StopListening("SwitchSfxValueMessage", onSwitchSfxValue);

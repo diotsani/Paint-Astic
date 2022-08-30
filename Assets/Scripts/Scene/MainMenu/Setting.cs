@@ -15,7 +15,9 @@ namespace PaintAstic.Scene.MainMenu
         [SerializeField] private TextMeshProUGUI _textSfx;
         [SerializeField] private TextMeshProUGUI _textBgm;
         [SerializeField] private GameObject _settingPage;
-        [SerializeField] private ConfigData _configData;
+
+        //[SerializeField] private ConfigData _configData;
+
 
         private void Awake()
         {
@@ -41,13 +43,13 @@ namespace PaintAstic.Scene.MainMenu
         private void OnClickSfxButton()
         {
             EventManager.TriggerEvent("SwitchSfxValueMessage");
-            UpdateSfxState(_configData.isSfxOn);
+            UpdateSfxState(ConfigData.configInstance.isSfxOn);
         }
 
         private void OnClickBgmButton()
         {
             EventManager.TriggerEvent("SwitchBgmValueMessage");
-            UpdateBgmState(_configData.isBgmOn);
+            UpdateBgmState(ConfigData.configInstance.isBgmOn);
         }
 
         public void UpdateSfxState(bool isMuted) => _textSfx.SetText($"Sfx {(isMuted ? "On" : "Off")}");
@@ -55,8 +57,8 @@ namespace PaintAstic.Scene.MainMenu
 
         public void LoadAllState()
         {
-            UpdateSfxState(_configData.isSfxOn);
-            UpdateBgmState(_configData.isBgmOn);
+            UpdateSfxState(ConfigData.configInstance.isSfxOn);
+            UpdateBgmState(ConfigData.configInstance.isBgmOn);
         }
 
         public void SetAllButtonListener()

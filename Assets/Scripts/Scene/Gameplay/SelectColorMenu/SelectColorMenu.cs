@@ -15,6 +15,16 @@ namespace PaintAstic.Module.Colors
         public List<Color> ListColors => _listColors;
         public int[] currentColor => _currentColor;
 
+        private void OnEnable()
+        {
+            EventManager.StartListening("ClickStartButtonMessage", OnPlayColor);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.StopListening("ClickStartButtonMessage", OnPlayColor);
+        }
+
         private void Reset()
         {
             _listColors = new List<Color>();
