@@ -1,5 +1,7 @@
 using PaintAstic.Global;
+using PaintAstic.Global.MatchHistory;
 using PaintAstic.Module.Message;
+using PaintAstic.Module.Player;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +10,11 @@ namespace PaintAstic.Module.Colors
 {
     public class SelectColorMenu : MonoBehaviour
     {
+        [SerializeField] private PlayerSpawner _spawnPlayer;
         [SerializeField] private List<Color> _listColors;
         [SerializeField] private Image[] _colorImage;
-        [SerializeField] private int[] _currentColor;
+        [SerializeField] private int[] _currentColor = { 0, 1};
+        [SerializeField] private int[] _avaliableColorIndex = { 6, 6};
 
         public List<Color> ListColors => _listColors;
         public int[] currentColor => _currentColor;
@@ -24,6 +28,16 @@ namespace PaintAstic.Module.Colors
         {
             EventManager.StopListening("ClickStartButtonMessage", OnPlayColor);
         }
+        private void Start()
+        {
+            for (int i = 0; i < _spawnPlayer.maxPlayer; i++)
+            {
+                if (MatchHistoryData.historyInstance.winCount[i] > 2)
+                {
+                    _avaliableColorIndex[i] += 1;
+                }
+            }
+        }
 
         private void Reset()
         {
@@ -32,6 +46,11 @@ namespace PaintAstic.Module.Colors
             _listColors.Add(Color.green);
             _listColors.Add(Color.blue);
             _listColors.Add(Color.yellow);
+            _listColors.Add(Color.cyan);
+            _listColors.Add(Color.white);
+            _listColors.Add(Color.magenta);
+            Color c = new Color(0.1f, 0.2f, 0.3f);
+            _listColors.Add(c);
         }
 
         public void DefaultColor()
@@ -44,7 +63,7 @@ namespace PaintAstic.Module.Colors
 
         public void OnPlayColor()
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < _spawnPlayer.maxPlayer; i++)
             {
                 EventManager.TriggerEvent("UpdateColor", new UpdateColorMessage(i, ListColors[_currentColor[i]]));
             }
@@ -59,14 +78,14 @@ namespace PaintAstic.Module.Colors
             {
                 if (nextColor < 0)
                 {
-                    nextColor = _listColors.Count - 1;
+                    nextColor = _avaliableColorIndex[indexButton] - 1;
                 }
                 if (nextColor == _currentColor[i])
                 {
                     nextColor -= 1;
                     if (nextColor < 0)
                     {
-                        nextColor = _listColors.Count - 1;
+                        nextColor = _avaliableColorIndex[indexButton] - 1;
                     }
                 }
             }
@@ -80,14 +99,14 @@ namespace PaintAstic.Module.Colors
 
             for (int i = 0; i < _currentColor.Length; i++)
             {
-                if (nextColor > _listColors.Count - 1)
+                if (nextColor > _avaliableColorIndex[indexButton] - 1)
                 {
                     nextColor = 0;
                 }
                 if (nextColor == _currentColor[i])
                 {
                     nextColor += 1;
-                    if (nextColor > _listColors.Count - 1)
+                    if (nextColor > _avaliableColorIndex[indexButton] - 1)
                     {
                         nextColor = 0;
                     }

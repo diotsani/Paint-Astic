@@ -13,6 +13,8 @@ namespace PaintAstic.Global.MatchHistory
 
         [SerializeField] private int[] _winCount = { 0, 0, 0, 0 };
 
+        public int[] winCount => _winCount;
+
         private void Awake()
         {
             if (historyInstance == null)
