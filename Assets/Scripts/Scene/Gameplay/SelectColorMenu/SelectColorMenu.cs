@@ -13,8 +13,9 @@ namespace PaintAstic.Module.Colors
         [SerializeField] private PlayerSpawner _spawnPlayer;
         [SerializeField] private List<Color> _listColors;
         [SerializeField] private Image[] _colorImage;
-        [SerializeField] private int[] _currentColor = { 0, 1};
-        [SerializeField] private int[] _avaliableColorIndex = { 6, 6};
+        [SerializeField] private int[] _currentColor = { 0, 1 };
+        [SerializeField] private int[] _avaliableColorIndex = { 6, 6 };
+        [SerializeField] private List<int> _listMilestone = new List<int>();
 
         public List<Color> ListColors => _listColors;
         public int[] currentColor => _currentColor;
@@ -32,9 +33,12 @@ namespace PaintAstic.Module.Colors
         {
             for (int i = 0; i < _spawnPlayer.maxPlayer; i++)
             {
-                if (MatchHistoryData.historyInstance.winCount[i] > 2)
+                foreach (int milestone in _listMilestone)
                 {
-                    _avaliableColorIndex[i] += 1;
+                    if (MatchHistoryData.historyInstance.winCount[i] > milestone)
+                    {
+                        _avaliableColorIndex[i] += 1;
+                    }
                 }
             }
         }
@@ -50,6 +54,10 @@ namespace PaintAstic.Module.Colors
             _listColors.Add(Color.white);
             _listColors.Add(Color.magenta);
             Color c = new Color(0.1f, 0.2f, 0.3f);
+            _listColors.Add(c);
+            c = new Color(0.9f, 0.7f, 0f);
+            _listColors.Add(c);
+            c = new Color(0.9f, 0.1f, 0.7f);
             _listColors.Add(c);
         }
 
