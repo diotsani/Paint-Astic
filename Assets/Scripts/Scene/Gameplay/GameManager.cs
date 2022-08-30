@@ -16,7 +16,8 @@ namespace PaintAstic.Scene.Gameplay
         {
             None,
             Setup,
-            Tutorial
+            Tutorial,
+            Restart
         }
 
         private void OnEnable()

@@ -37,7 +37,6 @@ namespace PaintAstic.Scene.MainMenu
         private void OnClickSettingButton()
         {         
             _settingPage.SetActive(true);
-            _menuPage.SetActive(false);
         }
 
         private void OnClickExitButton()

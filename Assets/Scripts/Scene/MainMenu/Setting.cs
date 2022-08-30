@@ -14,9 +14,7 @@ namespace PaintAstic.Scene.MainMenu
         [SerializeField] private Button _backButton;
         [SerializeField] private TextMeshProUGUI _textSfx;
         [SerializeField] private TextMeshProUGUI _textBgm;
-        [SerializeField] private GameObject _menuPage;
         [SerializeField] private GameObject _settingPage;
-
         [SerializeField] private ConfigData _configData;
 
         private void Awake()
@@ -38,7 +36,6 @@ namespace PaintAstic.Scene.MainMenu
         private void OnClickBackButton()
         {
             _settingPage.SetActive(false);
-            _menuPage.SetActive(true);
         }
 
         private void OnClickSfxButton()

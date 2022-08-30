@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
+
 namespace PaintAstic.Module.HUD
 {
     public class GameplayUI : MonoBehaviour
@@ -13,19 +15,42 @@ namespace PaintAstic.Module.HUD
         [SerializeField] private TextMeshProUGUI winPlayerText;
         [SerializeField] private TextMeshProUGUI winPlayerPointText;
         [SerializeField] private Image panelGameOver;
+        [SerializeField] private Button _optionButton;
+
+        [SerializeField] private GameObject _optionPage;
 
         [SerializeField] private TextMeshProUGUI[] scorePlayerText;
         [SerializeField] private int[] playerName;
+
         private void OnEnable()
         {
             EventManager.StartListening("UpdatePointMessage", AddPointToString);
             EventManager.StartListening("WinnerMessage", GetPlayerWinner);
         }
+
         private void OnDisable()
         {
             EventManager.StopListening("UpdatePointMessage", AddPointToString);
             EventManager.StopListening("WinnerMessage", GetPlayerWinner);
         }
+
+        private void Awake()
+        {
+            SetOptionButtonListener(_optionButton, OnClickOptionButton);
+        }
+
+        private void SetOptionButtonListener(Button button, UnityAction listener)
+        {
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(listener);
+        }
+
+        private void OnClickOptionButton()
+        {
+            Debug.Log("Open Option menu!");
+            _optionPage.SetActive(true);
+        }
+
         void AddPointToString(object pointData)
         {
             UpdatePointMessage message = (UpdatePointMessage)pointData;
