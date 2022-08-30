@@ -18,7 +18,7 @@ namespace PaintAstic.Scene.MainMenu
         {
             SetAllButtonListener();
         }
-
+        
         private void SetPlayButtonListener(UnityAction listener) => SetButtonListener(_playButton, listener);
         private void SetSettingButtonListener(UnityAction listener) => SetButtonListener(_SettingButton, listener);
         private void SetExitButtonListener(UnityAction listener) => SetButtonListener(_ExitButton, listener);
@@ -37,7 +37,6 @@ namespace PaintAstic.Scene.MainMenu
         private void OnClickSettingButton()
         {         
             _settingPage.SetActive(true);
-            _menuPage.SetActive(false);
         }
 
         private void OnClickExitButton()
@@ -51,11 +50,6 @@ namespace PaintAstic.Scene.MainMenu
             SetPlayButtonListener(OnClickPlayButton);
             SetSettingButtonListener(OnClickSettingButton);
             SetExitButtonListener(OnClickExitButton);
-        }
-
-        public void OnClickBackButton()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
