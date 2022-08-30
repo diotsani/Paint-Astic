@@ -31,7 +31,7 @@ namespace PaintAstic.Module.Point
 
         private void Start()
         {
-            for (int i = 0; i < playerSpawn._maxPlayer; i++)
+            for (int i = 0; i < playerSpawn.maxPlayer; i++)
             {
                 _playerPointList.Add(0);
             }

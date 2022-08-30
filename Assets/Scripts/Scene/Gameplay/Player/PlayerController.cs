@@ -19,6 +19,7 @@ namespace PaintAstic.Module.Player
         private float _timerIsMovable = 0;
         private float _timerLastCollectPoint = 0;
         private float _intervalLastCollectPoint = 7f;
+        private bool isMovable;
         private int _maxX;
         private int _maxZ;
 
@@ -28,9 +29,6 @@ namespace PaintAstic.Module.Player
         public int currentZ { get; private set; }
         public int lastX { get; private set; }
         public int lastZ { get; private set; }
-
-
-        private bool isMovable;
 
         private void Start()
         {
