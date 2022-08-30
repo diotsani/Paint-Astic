@@ -8,7 +8,9 @@ namespace PaintAstic.Global.GameAudio
 {
     public class GameAudioManager : MonoBehaviour
     {
-        [SerializeField] private ConfigData _configData;
+        public static GameAudioManager audioInstance;
+
+        //[SerializeField] private ConfigData _configData;
 
         [SerializeField] private AudioSource _bgmSource;
         [SerializeField] private AudioSource _sfxSource;
@@ -23,12 +25,20 @@ namespace PaintAstic.Global.GameAudio
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            if (audioInstance == null)
+            {
+                audioInstance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
             _onCollectPoint = new UnityAction(OnCollectPoint);
             _onBomb = new UnityAction(OnBomb);
             _onPlayerMove = new UnityAction(OnPlayerMove);
         }
-
+        
         private void OnEnable()
         {
             EventManager.StartListening("CollectedMessage", _onCollectPoint);
@@ -43,10 +53,17 @@ namespace PaintAstic.Global.GameAudio
             EventManager.StopListening("PlayMoveMessage", _onPlayerMove);
         }
 
+        private void OnDestroy()
+        {
+            EventManager.StopListening("CollectedMessage", _onCollectPoint);
+            EventManager.StopListening("BombMessage", _onBomb);
+            EventManager.StopListening("PlayMoveMessage", _onPlayerMove);
+        }
+
         private void Update()
         {
-            _bgmSource.mute = !_configData.isBgmOn;
-            _sfxSource.mute = !_configData.isSfxOn;
+            _bgmSource.mute = !ConfigData.configInstance.isBgmOn;
+            _sfxSource.mute = !ConfigData.configInstance.isSfxOn;
         }
 
         public void PlaySfx(AudioClip clip)
@@ -57,16 +74,19 @@ namespace PaintAstic.Global.GameAudio
         public void OnCollectPoint()
         {
             PlaySfx(_collectPointSound);
+            Debug.Log("Collect point sound");
         }
 
         public void OnBomb()
         {
             PlaySfx(_bombSound);
+            Debug.Log("Bomb sound");
         }
 
         public void OnPlayerMove()
         {
             PlaySfx(_playerMoveSound);
+            Debug.Log("Player move sound");
         }
     }
 }

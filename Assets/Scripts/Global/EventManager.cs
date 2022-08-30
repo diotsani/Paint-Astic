@@ -12,6 +12,8 @@ namespace PaintAstic.Global
     {
         private Dictionary<string, UnityEvent> eventDictionary;
         private Dictionary<string, TypedEvent> typedEventDictionary;
+        
+        public static EventManager eventInstance;
 
         private static EventManager eventManager;
 
@@ -25,7 +27,6 @@ namespace PaintAstic.Global
 
                     if (!eventManager)
                     {
-                        Destroy(eventManager.gameObject);
                         Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
                     }
                     else
@@ -38,9 +39,17 @@ namespace PaintAstic.Global
             }
         }
 
-        private void OnEnable()
+        private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            if (eventInstance == null)
+            {
+                eventInstance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         void Init()
