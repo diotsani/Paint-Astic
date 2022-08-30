@@ -29,6 +29,7 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
             EventManager.StartListening("OnGamePauseMessage", OnGamePause);
             EventManager.StartListening("OnGameContinueMessage", OnGameContinue);
             EventManager.StartListening("SendPlayerData", OnPlayerTouch);
+            EventManager.StartListening("CloseTutorialMessage", OnGameStarted);
         }
 
         private void OnDisable()
@@ -36,16 +37,22 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
             EventManager.StopListening("OnGamePauseMessage", OnGamePause);
             EventManager.StopListening("OnGameContinueMessage", OnGameContinue);
             EventManager.StopListening("SendPlayerData", OnPlayerTouch);
+            EventManager.StopListening("CloseTutorialMessage", OnGameStarted);
         }
 
         private void Start()
         {
             _prevX = -1;
             _prevZ = -1;
+            _isRunning = false;
         }
 
         private void Update()
         {
+            if (!_isRunning)
+            {
+                return;
+            }
             _spawnDelayTimer += Time.deltaTime;
             if (_spawnDelayTimer > _spawnDelay)
             {
@@ -141,6 +148,11 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
                     _bombPool[i].ResetIndex();
                 }
             }
+        }
+
+        private void OnGameStarted()
+        {
+            _isRunning = true;
         }
     }
 }
