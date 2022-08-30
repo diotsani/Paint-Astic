@@ -17,14 +17,21 @@ namespace PaintAstic.Module.Option
 
         private void Awake()
         {
+            SetAllButtonListener();
             SetHomeButtonListener(OnClickHomeButton);
             SetRestartButtonListener(OnClickRestartButton);
         }
 
-        private void OnClickHomeButton()
+        public  void OnClickHomeButton()
         {
             Debug.Log("Back To main menu!");
             SceneManager.LoadScene("MainMenu");
+        }
+
+        public override void OnClickBackButton()
+        {
+            base.OnClickBackButton();
+            Time.timeScale = 1;
         }
 
         private void OnClickRestartButton()

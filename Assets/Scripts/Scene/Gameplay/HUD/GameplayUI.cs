@@ -49,6 +49,7 @@ namespace PaintAstic.Module.HUD
         {
             Debug.Log("Open Option menu!");
             _optionPage.SetActive(true);
+            Time.timeScale = 0;
         }
 
         void AddPointToString(object pointData)

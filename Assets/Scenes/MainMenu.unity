@@ -1256,7 +1256,6 @@ MonoBehaviour:
   _backButton: {fileID: 2033211302}
   _textSfx: {fileID: 1269894010}
   _textBgm: {fileID: 419538391}
-  _menuPage: {fileID: 114370549}
   _settingPage: {fileID: 591524486}
   _configData: {fileID: 1730717244}
 --- !u!1 &668378503

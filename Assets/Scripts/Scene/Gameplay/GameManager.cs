@@ -35,6 +35,7 @@ namespace PaintAstic.Scene.Gameplay
         private void Awake()
         {
             Instance = this;
+            SetPageState(PageState.Setup);
         }
 
         void SetPageState(PageState state)

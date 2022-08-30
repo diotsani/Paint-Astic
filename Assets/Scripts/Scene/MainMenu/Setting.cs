@@ -33,7 +33,7 @@ namespace PaintAstic.Scene.MainMenu
             button.onClick.AddListener(listener);
         }
 
-        private void OnClickBackButton()
+        public virtual void OnClickBackButton()
         {
             _settingPage.SetActive(false);
         }
