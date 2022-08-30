@@ -16,7 +16,8 @@ namespace PaintAstic.Scene.Gameplay
         {
             None,
             Setup,
-            Tutorial
+            Tutorial,
+            Restart
         }
 
         private void OnEnable()
@@ -34,6 +35,7 @@ namespace PaintAstic.Scene.Gameplay
         private void Awake()
         {
             Instance = this;
+            SetPageState(PageState.Setup);
         }
 
         void SetPageState(PageState state)
