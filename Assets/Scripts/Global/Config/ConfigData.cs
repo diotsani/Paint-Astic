@@ -25,6 +25,7 @@ namespace PaintAstic.Global.Config
             else
             {
                 Destroy(gameObject);
+                return;
             }
             Debug.Log(configInstance);
             onSwitchBgmValue = new UnityAction(ToggleMusic);
@@ -46,11 +47,6 @@ namespace PaintAstic.Global.Config
             EventManager.StopListening("SwitchSfxValueMessage", onSwitchSfxValue);
         }
 
-        private void OnDestroy()
-        {
-            EventManager.StopListening("SwitchBgmValueMessage", onSwitchBgmValue);
-            EventManager.StopListening("SwitchSfxValueMessage", onSwitchSfxValue);
-        }
 
         private void ToggleMusic()
         {
