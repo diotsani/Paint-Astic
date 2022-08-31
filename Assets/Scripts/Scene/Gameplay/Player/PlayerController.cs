@@ -1,27 +1,27 @@
 using PaintAstic.Global;
+using PaintAstic.Module.GridSystem;
 using PaintAstic.Module.Message;
 using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
-using PaintAstic.Module.Tiles;
-using PaintAstic.Module.GridSystem;
-using System.Collections.Generic;
 
 namespace PaintAstic.Module.Player
 {
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayingGrid _gridManager;
-        [SerializeField] private MeshRenderer _mesh; 
+        [SerializeField] private MeshRenderer _mesh;
 
         private float _smoothSpeed = 1;
-        private float _intervalMove = 0.2f;
+        private float _intervalMove = 0.3f;
+        private float _movingTimer = 0f;
+        private float _movingTime = 0.2f;
         private float _timerIsMovable = 0;
         private float _timerLastCollectPoint = 0;
         private float _intervalLastCollectPoint = 7f;
-        private bool isMovable;
+        private bool _isMovable;
+        private bool _isMoving;
         private int _maxX;
         private int _maxZ;
+        private Vector3 _desiredPos;
 
         public bool isDoublePoint { get; private set; } = true;
         public int playerIndex { get; set; }
@@ -44,20 +44,38 @@ namespace PaintAstic.Module.Player
             _timerIsMovable += Time.deltaTime;
             _timerLastCollectPoint += Time.deltaTime;
 
-            if(_timerIsMovable > _intervalMove)
+            if (_timerIsMovable > _intervalMove)
             {
-                isMovable = true;
+                _isMovable = true;
             }
 
             if (_timerLastCollectPoint > _intervalLastCollectPoint)
             {
                 isDoublePoint = false;
             }
+
+            if (_isMoving)
+            {
+                if (_movingTimer < _movingTime)
+                {
+                    transform.position = Vector3.Lerp(transform.position, _desiredPos, _movingTimer / _movingTime);
+                    _movingTimer += Time.deltaTime;
+                }
+                else
+                {
+                    _movingTimer = 0;
+                    currentX = (int)_desiredPos.x;
+                    currentZ = (int)_desiredPos.z;
+                    EventManager.TriggerEvent("SendPlayerData", new PlayerDataMessage(currentX, currentZ, lastX, lastZ, playerIndex, isDoublePoint));
+                    _isMoving = false;
+                }
+
+            }
         }
 
         public void Move(Vector2Int move)
         {
-            if (isMovable)
+            if (_isMovable)
             {
                 var nextMove = new Vector2Int(currentX + move.x, currentZ + move.y);
                 if (nextMove.x < 0 || nextMove.x > _maxX || nextMove.y < 0
@@ -67,22 +85,13 @@ namespace PaintAstic.Module.Player
                 }
                 lastX = currentX;
                 lastZ = currentZ;
-
-                Vector3 desiredPos = _gridManager.gridList[nextMove.x, nextMove.y].transform.position;
-
-                Vector3 smoothPos = Vector3.Lerp(transform.position, desiredPos, _smoothSpeed);
-
-
-                transform.position = smoothPos;
-                currentX = (int)smoothPos.x;
-                currentZ = (int)smoothPos.z;
-                EventManager.TriggerEvent("SendPlayerData", new PlayerDataMessage(currentX, currentZ, lastX, lastZ, playerIndex, isDoublePoint));
-
-                isMovable = false;
+                _desiredPos = _gridManager.gridList[nextMove.x, nextMove.y].transform.position;
+                _isMoving = true;
+                _isMovable = false;
                 _timerIsMovable = 0;
                 EventManager.TriggerEvent("PlayMoveMessage");
             }
-            
+
         }
 
         public void SetDependencies(PlayingGrid playingGrid)
