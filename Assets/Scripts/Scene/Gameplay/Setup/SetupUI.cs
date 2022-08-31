@@ -24,8 +24,6 @@ namespace PaintAstic.Scene.Gameplay.Setup
             }
 
             SetAllButtonListener();
-            SetLeftButtonListener();
-            SetRigthButtonListener();
         }
         private void Start()
         {

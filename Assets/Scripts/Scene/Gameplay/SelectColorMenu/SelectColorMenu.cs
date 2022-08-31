@@ -82,6 +82,7 @@ namespace PaintAstic.Module.Colors
             for (int i = 0; i < _spawnPlayer.maxPlayer; i++)
             {
                 EventManager.TriggerEvent("UpdateColor", new UpdateColorMessage(i, ListColors[_currentColor[i]]));
+                EventManager.TriggerEvent("UpdateColorSpawn", new UpdateColorMessage(i, ListColors[_currentColor[i]]));
             }
         }
 

@@ -28,14 +28,14 @@ namespace PaintAstic.Module.Player
         private void OnEnable()
         {
             EventManager.StartListening("Move", MovePlayer);
-            EventManager.StartListening("UpdateColor", SpawnPlayer);
+            EventManager.StartListening("UpdateColorSpawn", SpawnPlayer);
             EventManager.StartListening("ResetLastCollectPointMessage", ResetLastCollectPoint);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening("Move", MovePlayer);
-            EventManager.StopListening("UpdateColor", SpawnPlayer);
+            EventManager.StopListening("UpdateColorSpawn", SpawnPlayer);
             EventManager.StopListening("ResetLastCollectPointMessage", ResetLastCollectPoint);
 
         }
