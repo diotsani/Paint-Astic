@@ -5,9 +5,15 @@ using UnityEngine.Events;
 
 namespace PaintAstic.Global
 {
+    [System.Serializable]
+    public class TypedEvent : UnityEvent<object> { }
+    
     public class EventManager : MonoBehaviour
     {
         private Dictionary<string, UnityEvent> eventDictionary;
+        private Dictionary<string, TypedEvent> typedEventDictionary;
+        
+        public static EventManager eventInstance;
 
         private static EventManager eventManager;
 
@@ -33,9 +39,17 @@ namespace PaintAstic.Global
             }
         }
 
-        private void OnEnable()
+        private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            if (eventInstance == null)
+            {
+                eventInstance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         void Init()
@@ -43,13 +57,13 @@ namespace PaintAstic.Global
             if (eventDictionary == null)
             {
                 eventDictionary = new Dictionary<string, UnityEvent>();
+                typedEventDictionary = new Dictionary<string, TypedEvent>();
             }
-
-            
         }
 
         public static void StartListening(string eventName, UnityAction listener)
         {
+            if (listener == null) return;
             UnityEvent thisEvent = null;
             if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
             {
@@ -63,11 +77,39 @@ namespace PaintAstic.Global
             }
         }
 
+        public static void StartListening(string eventName, UnityAction<object> listener)
+        {
+            if (listener == null) return;
+            TypedEvent thisEvent = null;
+            if (instance.typedEventDictionary.TryGetValue(eventName, out thisEvent))
+            {
+                thisEvent.AddListener(listener);
+            }
+            else
+            {
+                thisEvent = new TypedEvent();
+                thisEvent.AddListener(listener);
+                instance.typedEventDictionary.Add(eventName, thisEvent);
+            }
+        }
+
         public static void StopListening(string eventName, UnityAction listener)
         {
+            if (listener == null) return;
             if (eventManager == null) return;
             UnityEvent thisEvent = null;
             if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+            {
+                thisEvent.RemoveListener(listener);
+            }
+        }
+
+        public static void StopListening(string eventName, UnityAction<object> listener)
+        {
+            if (listener == null) return;
+            if (eventManager == null) return;
+            TypedEvent thisEvent = null;
+            if (instance.typedEventDictionary.TryGetValue(eventName, out thisEvent))
             {
                 thisEvent.RemoveListener(listener);
             }
@@ -79,6 +121,15 @@ namespace PaintAstic.Global
             if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
             {
                 thisEvent.Invoke();
+            }
+        }
+
+        public static void TriggerEvent(string eventName, object data)
+        {
+            TypedEvent thisEvent = null;
+            if (instance.typedEventDictionary.TryGetValue(eventName, out thisEvent))
+            {
+                thisEvent.Invoke(data);
             }
         }
     }
