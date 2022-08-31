@@ -1,12 +1,10 @@
 using PaintAstic.Global;
-using PaintAstic.Module.Message;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Events;
 using PaintAstic.Global.Config;
+using PaintAstic.Module.Message;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace PaintAstic.Module.HUD
 {
@@ -71,8 +69,17 @@ namespace PaintAstic.Module.HUD
         {
             WinnerMessage message = (WinnerMessage)winData;
             int WinPlayerName = message.playerIndex + 1;
-            winPlayerText.text = "Player " + WinPlayerName.ToString() + " WIN";
-            winPlayerPointText.text = "Your Point " + message.point.ToString();
+            bool isDraw = message.isDraw;
+            if (isDraw)
+            {
+                winPlayerText.text = "No Winner!";
+                winPlayerPointText.text = "Draw!";
+            }
+            else
+            {
+                winPlayerText.text = "Player " + WinPlayerName.ToString() + " WIN";
+                winPlayerPointText.text = "Your Point " + message.point.ToString();
+            }
 
             panelGameOver.gameObject.SetActive(true);
 
