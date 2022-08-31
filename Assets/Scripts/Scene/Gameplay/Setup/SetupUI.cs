@@ -17,9 +17,6 @@ namespace PaintAstic.Scene.Gameplay.Setup
         private void Awake()
         {
             SetAllButtonListener();
-            SetLeftButtonListener();
-            SetRigthButtonListener();
-
             _selectColorMenu.DefaultColor();
         }
 
@@ -46,6 +43,8 @@ namespace PaintAstic.Scene.Gameplay.Setup
         public void SetAllButtonListener()
         {
             SetPlayButtonListener(OnClickStartButton);
+            SetLeftButtonListener();
+            SetRigthButtonListener();
         }
 
         public void SetButtonListener(Button button, UnityAction listener)
