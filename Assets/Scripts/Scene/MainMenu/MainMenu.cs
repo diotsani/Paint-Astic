@@ -11,6 +11,7 @@ namespace PaintAstic.Scene.MainMenu
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _SettingButton;
         [SerializeField] private Button _ExitButton;
+        [SerializeField] private GameObject _playerPage;
         [SerializeField] private GameObject _settingPage;
         [SerializeField] private GameObject _menuPage;
 
@@ -30,8 +31,9 @@ namespace PaintAstic.Scene.MainMenu
         }
 
         private void OnClickPlayButton()
-        {        
-            SceneManager.LoadScene("Gameplay");
+        {
+            _playerPage.SetActive(true);
+            
         }
 
         private void OnClickSettingButton()

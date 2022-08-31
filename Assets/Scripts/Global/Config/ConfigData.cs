@@ -9,10 +9,13 @@ namespace PaintAstic.Global.Config
     {
         public static ConfigData configInstance;
 
+        private int _playerNumbers;
         public bool isBgmOn { get; private set; }
         public bool isSfxOn { get; private set; }
         private UnityAction onSwitchBgmValue;
         private UnityAction onSwitchSfxValue;
+
+        public int playerNumbers => _playerNumbers;
 
         private void Awake()
         {
@@ -37,16 +40,23 @@ namespace PaintAstic.Global.Config
             LoadData();
             EventManager.StartListening("SwitchBgmValueMessage", onSwitchBgmValue);
             EventManager.StartListening("SwitchSfxValueMessage", onSwitchSfxValue);
+            EventManager.StartListening("PlayerNumbersMessage", OnPlayerNumberGet);
             Debug.Log("BGM status: " + isBgmOn);
             Debug.Log("SFX status: " + isSfxOn);
         }
 
         private void OnDisable()
         {
+            EventManager.StopListening("PlayerNumbersMessage", OnPlayerNumberGet);
             EventManager.StopListening("SwitchBgmValueMessage", onSwitchBgmValue);
             EventManager.StopListening("SwitchSfxValueMessage", onSwitchSfxValue);
         }
 
+        private void OnPlayerNumberGet(object data)
+        {
+            _playerNumbers = (int)data;
+            Debug.Log(_playerNumbers);
+        }
 
         private void ToggleMusic()
         {

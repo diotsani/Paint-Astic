@@ -1,4 +1,5 @@
 using PaintAstic.Global;
+using PaintAstic.Global.Config;
 using PaintAstic.Module.Colors;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +10,7 @@ namespace PaintAstic.Scene.Gameplay.Setup
 
     public class SetupUI : MonoBehaviour, IButtonAble
     {
+        [SerializeField] private GameObject[] _playerSelectMenu;
         [SerializeField] private Button _startButton;
         [SerializeField] private Button[] _leftButton;
         [SerializeField] private Button[] _rightButton;
@@ -16,10 +18,18 @@ namespace PaintAstic.Scene.Gameplay.Setup
 
         private void Awake()
         {
+            for (int i = 0; i < ConfigData.configInstance.playerNumbers; i++)
+            {
+                _playerSelectMenu[i].SetActive(true);
+            }
+            
             SetAllButtonListener();
             SetLeftButtonListener();
             SetRigthButtonListener();
+        }
 
+        private void Start()
+        {
             _selectColorMenu.DefaultColor();
         }
 

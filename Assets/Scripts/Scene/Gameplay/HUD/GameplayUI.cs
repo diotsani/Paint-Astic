@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using PaintAstic.Global.Config;
 
 namespace PaintAstic.Module.HUD
 {
@@ -36,6 +37,11 @@ namespace PaintAstic.Module.HUD
 
         private void Awake()
         {
+            for (int i = 0; i < ConfigData.configInstance.playerNumbers; i++)
+            {
+                scorePlayerText[i].gameObject.SetActive(true);
+            }
+
             SetOptionButtonListener(_optionButton, OnClickOptionButton);
         }
 

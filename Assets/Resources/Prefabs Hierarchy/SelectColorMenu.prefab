@@ -54,8 +54,18 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 1, a: 1}
   - {r: 0.1, g: 0.2, b: 0.3, a: 1}
+  - {r: 0.9, g: 0.7, b: 0, a: 1}
+  - {r: 0.029636865, g: 0.4245283, b: 0.057382617, a: 1}
+  _listMilestone: 0200000005000000080000000b000000
   _colorImage:
   - {fileID: 0}
   - {fileID: 0}
-  _currentColor: 0000000001000000
-  _avaliableColorIndex: 0600000006000000
+  - {fileID: 0}
+  - {fileID: 0}
+  _textMilestone:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _currentColor: 00000000010000000200000003000000
+  _avaliableColorIndex: 06000000060000000600000006000000
