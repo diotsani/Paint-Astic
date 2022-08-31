@@ -22,11 +22,11 @@ namespace PaintAstic.Scene.Gameplay.Setup
             {
                 _playerSelectMenu[i].SetActive(true);
             }
-            
+
             SetAllButtonListener();
             SetLeftButtonListener();
             SetRigthButtonListener();
-
+        }
         private void Start()
         {
             _selectColorMenu.DefaultColor();
