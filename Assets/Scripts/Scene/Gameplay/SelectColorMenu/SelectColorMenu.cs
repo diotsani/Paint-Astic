@@ -1,8 +1,10 @@
 using PaintAstic.Global;
+using PaintAstic.Global.Config;
 using PaintAstic.Global.MatchHistory;
 using PaintAstic.Module.Message;
 using PaintAstic.Module.Player;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,10 +14,13 @@ namespace PaintAstic.Module.Colors
     {
         [SerializeField] private PlayerSpawner _spawnPlayer;
         [SerializeField] private List<Color> _listColors;
-        [SerializeField] private Image[] _colorImage;
-        [SerializeField] private int[] _currentColor = { 0, 1 };
-        [SerializeField] private int[] _avaliableColorIndex = { 6, 6 };
         [SerializeField] private List<int> _listMilestone = new List<int>();
+        [SerializeField] private Image[] _colorImage;
+        [SerializeField] private TextMeshProUGUI[] _textMilestone;
+        [SerializeField] private int[] _currentColor = { 0, 1,2,3 };
+        [SerializeField] private int[] _avaliableColorIndex = { 6, 6,6,6 };
+
+        private int _playerNumber;
 
         public List<Color> ListColors => _listColors;
         public int[] currentColor => _currentColor;
@@ -31,6 +36,7 @@ namespace PaintAstic.Module.Colors
         }
         private void Start()
         {
+            _playerNumber = ConfigData.configInstance.playerNumbers;
             for (int i = 0; i < _spawnPlayer.maxPlayer; i++)
             {
                 foreach (int milestone in _listMilestone)
@@ -40,6 +46,8 @@ namespace PaintAstic.Module.Colors
                         _avaliableColorIndex[i] += 1;
                     }
                 }
+
+                _textMilestone[i].text = "Total win: " + MatchHistoryData.historyInstance.winCount[i].ToString();
             }
         }
 
@@ -63,7 +71,7 @@ namespace PaintAstic.Module.Colors
 
         public void DefaultColor()
         {
-            for (int i = 0; i < _colorImage.Length; i++)
+            for (int i = 0; i < _spawnPlayer.maxPlayer; i++)
             {
                 OnChangeColor(i, _currentColor[i]);
             }
@@ -81,20 +89,30 @@ namespace PaintAstic.Module.Colors
         {
             int nextColor = _currentColor[indexButton];
             nextColor--;
+            int refNextColor;
+            bool isColorAvaliable = false;
 
-            for (int i = 0; i < _currentColor.Length; i++)
+            while (!isColorAvaliable)
             {
+                refNextColor = nextColor;
                 if (nextColor < 0)
                 {
                     nextColor = _avaliableColorIndex[indexButton] - 1;
                 }
-                if (nextColor == _currentColor[i])
+                for (int i = 0; i < _playerNumber; i++)
                 {
-                    nextColor -= 1;
-                    if (nextColor < 0)
+                    if (nextColor == _currentColor[i])
                     {
-                        nextColor = _avaliableColorIndex[indexButton] - 1;
+                        nextColor--;
+                        if (nextColor < 0)
+                        {
+                            nextColor = _avaliableColorIndex[indexButton] - 1;
+                        }
                     }
+                }
+                if (refNextColor == nextColor)
+                {
+                    isColorAvaliable = true;
                 }
             }
             _currentColor[indexButton] = nextColor;
@@ -104,20 +122,30 @@ namespace PaintAstic.Module.Colors
         {
             int nextColor = _currentColor[indexButton];
             nextColor++;
+            int refNextColor;
+            bool isColorAvaliable = false;
 
-            for (int i = 0; i < _currentColor.Length; i++)
+            while (!isColorAvaliable)
             {
+                refNextColor = nextColor;
                 if (nextColor > _avaliableColorIndex[indexButton] - 1)
                 {
                     nextColor = 0;
                 }
-                if (nextColor == _currentColor[i])
+                for (int i = 0; i < _playerNumber; i++)
                 {
-                    nextColor += 1;
-                    if (nextColor > _avaliableColorIndex[indexButton] - 1)
+                    if (nextColor == _currentColor[i])
                     {
-                        nextColor = 0;
+                        nextColor++;
+                        if (nextColor > _avaliableColorIndex[indexButton] - 1)
+                        {
+                            nextColor = 0;
+                        }
                     }
+                }
+                if (refNextColor == nextColor)
+                {
+                    isColorAvaliable = true;
                 }
             }
             _currentColor[indexButton] = nextColor;

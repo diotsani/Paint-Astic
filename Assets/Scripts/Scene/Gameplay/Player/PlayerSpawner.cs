@@ -1,4 +1,5 @@
 using PaintAstic.Global;
+using PaintAstic.Global.Config;
 using PaintAstic.Module.GridSystem;
 using PaintAstic.Module.Message;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace PaintAstic.Module.Player
 
         public int maxPlayer => _maxPlayer;
         public List<PlayerController> pooledPlayers => _pooledPlayers;
+
+        private void Awake()
+        {
+            _maxPlayer = ConfigData.configInstance.playerNumbers;
+        }
 
         private void OnEnable()
         {
