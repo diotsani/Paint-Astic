@@ -1,9 +1,9 @@
 # Kelompok5-Tugas5
 
 - Abdullah
-- Muhamad Faisal
-- Muhammad Dio Tsani Iba
-- Muhammad Raihan Aziz
+- Muhamad 
+- Muhammad 
+- Muhammad 
 
 Link TDD Paint-astic kelompok 5:
 
