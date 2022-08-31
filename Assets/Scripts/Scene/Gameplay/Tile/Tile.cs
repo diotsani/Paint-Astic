@@ -16,11 +16,6 @@ namespace PaintAstic.Module.Tiles
 
         public int _tileIndexColor { get; private set; }
         public bool isStepped = false;
-
-        private void Awake()
-        {
-            
-        }
         public void SetIndexTile(int tileIndexX, int tileIndexZ)
         {
             this.tileIndexX = tileIndexX;
