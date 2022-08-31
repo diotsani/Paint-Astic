@@ -43,6 +43,11 @@ namespace PaintAstic.Global.MatchHistory
         {
             WinnerMessage winMessage = (WinnerMessage)winnerData;
             int winIndex = winMessage.playerIndex;
+            bool isDraw = winMessage.isDraw;
+            if (isDraw)
+            {
+                return;
+            }
             _winCount[winIndex]++;
             Debug.Log("win count player " + _winCount[winIndex]);
             Save();

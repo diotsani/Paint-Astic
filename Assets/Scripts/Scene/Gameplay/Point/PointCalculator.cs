@@ -5,6 +5,8 @@ using UnityEngine;
 using PaintAstic.Global;
 using System.Linq;
 using PaintAstic.Module.Message;
+using PaintAstic.Global.Config;
+
 namespace PaintAstic.Module.Point
 {
     public class PointCalculator : MonoBehaviour
@@ -52,17 +54,35 @@ namespace PaintAstic.Module.Point
 
         void OnGameOver()
         {
-            int highestPoint = 0;
+            int highestPoint = _playerPointList[0];
+            //int player1 = _playerPointList[0];
             int winnerIndex = 0;
+            bool isDraw = true;
+            List<int> playerPointList = new List<int>();
+
+            for (int i = 0; i < ConfigData.configInstance.playerNumbers; i++)
+            {
+                playerPointList.Add(_playerPointList[i]);
+            }
+            
             for (int i = 0; i < _playerPointList.Count; i++)
             {
                 if (highestPoint < _playerPointList[i])
                 {
                     highestPoint = _playerPointList[i];
                     winnerIndex = i;
+                    isDraw = false;
                 }
             }
-            EventManager.TriggerEvent("WinnerMessage", new WinnerMessage(winnerIndex, highestPoint));
+            for (int i = 1; i < _playerPointList.Count; i++)
+            {
+                if (highestPoint > _playerPointList[i])
+                {
+                    isDraw = false;
+                }
+            }
+            
+            EventManager.TriggerEvent("WinnerMessage", new WinnerMessage(winnerIndex, highestPoint, isDraw));
         }
     }
 }
