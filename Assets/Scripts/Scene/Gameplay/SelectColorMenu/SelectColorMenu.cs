@@ -17,8 +17,8 @@ namespace PaintAstic.Module.Colors
         [SerializeField] private List<int> _listMilestone = new List<int>();
         [SerializeField] private Image[] _colorImage;
         [SerializeField] private TextMeshProUGUI[] _textMilestone;
-        [SerializeField] private int[] _currentColor = { 0, 1,2,3 };
-        [SerializeField] private int[] _avaliableColorIndex = { 6, 6,6,6 };
+        [SerializeField] private int[] _currentColor = { 0, 1, 2, 3 };
+        [SerializeField] private int[] _avaliableColorIndex = { 6, 6, 6, 6 };
 
         private int _playerNumber;
 
