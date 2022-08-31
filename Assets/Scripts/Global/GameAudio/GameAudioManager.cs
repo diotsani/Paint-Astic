@@ -69,19 +69,16 @@ namespace PaintAstic.Global.GameAudio
         public void OnCollectPoint()
         {
             PlaySfx(_collectPointSound);
-            Debug.Log("Collect point sound");
         }
 
         public void OnBomb()
         {
             PlaySfx(_bombSound);
-            Debug.Log("Bomb sound");
         }
 
         public void OnPlayerMove()
         {
             PlaySfx(_playerMoveSound);
-            Debug.Log("Player move sound");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace PaintAstic.Module.Tiles
         public int tileIndexX { get; private set; }
         public int tileIndexZ { get; private set; }
 
-        private Color defaultColor = Color.gray;
+        private Color defaultColor;
         [SerializeField] private List <Color> playerColor = new List<Color>();
 
         public int _tileIndexColor { get; private set; }
@@ -28,6 +28,7 @@ namespace PaintAstic.Module.Tiles
         }
         public void DefaultColors()
         {
+            ColorUtility.TryParseHtmlString("C0C0C0",out defaultColor);
             gameObject.GetComponent<Renderer>().material.color = defaultColor;
             _tileIndexColor = 0;
         }
