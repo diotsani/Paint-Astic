@@ -59,13 +59,14 @@ namespace PaintAstic.Module.Colors
             _listColors.Add(Color.blue);
             _listColors.Add(Color.yellow);
             _listColors.Add(Color.cyan);
-            _listColors.Add(Color.white);
             _listColors.Add(Color.magenta);
             Color c = new Color(0.1f, 0.2f, 0.3f);
             _listColors.Add(c);
-            c = new Color(0.9f, 0.7f, 0f);
+            c = new Color(0.4f, 0.7f, 0f);
             _listColors.Add(c);
-            c = new Color(0.9f, 0.1f, 0.7f);
+            c = new Color(0.4f, 0.2f, 0f);
+            _listColors.Add(c);
+            c = new Color(1f, 0.65f, 0);
             _listColors.Add(c);
         }
 
