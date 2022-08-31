@@ -1,7 +1,7 @@
 # Kelompok5-Tugas5
 
 - Abdullah
-- Muhamad 
+- Muhamad Faisal
 - Muhammad Dio Tsani Iba
 - Muhammad Raihan Aziz
 
