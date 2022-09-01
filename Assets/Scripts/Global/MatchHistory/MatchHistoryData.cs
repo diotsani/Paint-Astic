@@ -12,7 +12,8 @@ namespace PaintAstic.Global.MatchHistory
         private const string _prefsKey = "MatchHistoryData";
 
         [SerializeField] private int[] _winCount = { 0, 0, 0, 0 };
-        [SerializeField] private PlayerData[] _playerDatas; 
+        [SerializeField] private PlayerData[] _playerDatas;
+        [SerializeField] private List<int> _listMilestone = new List<int>();
 
         public int[] winCount => _winCount;
         public PlayerData[] playerDatas => _playerDatas;
@@ -50,8 +51,16 @@ namespace PaintAstic.Global.MatchHistory
             {
                 return;
             }
-            _winCount[winIndex]++;
-            Debug.Log("win count player " + _winCount[winIndex]);
+            _playerDatas[winIndex].winCount++;
+            foreach (int milestone in _listMilestone)
+            {
+                if (_playerDatas[winIndex].winCount == milestone)
+                {
+                    _playerDatas[winIndex].availableColor += 1;
+                }
+            }
+
+            Debug.Log("win count player " + _playerDatas[winIndex].winCount);
             Save();
         }
 
@@ -68,6 +77,22 @@ namespace PaintAstic.Global.MatchHistory
             {
                 string json = PlayerPrefs.GetString(_prefsKey);
                 JsonUtility.FromJsonOverwrite(json, this);
+                for (int i = 0; i < _winCount.Length; i++)
+                {
+                    if (_winCount[i] != 0)
+                    {
+                        _playerDatas[i].winCount = _winCount[i];
+                        _playerDatas[i].availableColor = 6;
+                        foreach (int milestone in _listMilestone)
+                        {
+                            if (_playerDatas[i].winCount >= milestone)
+                            {
+                                _playerDatas[i].availableColor += 1;
+                            }
+                        }
+                        _winCount[i] = 0;
+                    }
+                }
             }
             else
             {

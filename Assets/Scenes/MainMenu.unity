@@ -1975,6 +1975,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4431955913762193918, guid: fe4779df25d021847ae5c88879cfd8a6, type: 3}
+      propertyPath: _playerDatas.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431955913762193918, guid: fe4779df25d021847ae5c88879cfd8a6, type: 3}
+      propertyPath: _listMilestone.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431955913762193918, guid: fe4779df25d021847ae5c88879cfd8a6, type: 3}
+      propertyPath: _listMilestone.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431955913762193918, guid: fe4779df25d021847ae5c88879cfd8a6, type: 3}
+      propertyPath: _listMilestone.Array.data[1]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431955913762193918, guid: fe4779df25d021847ae5c88879cfd8a6, type: 3}
+      propertyPath: _listMilestone.Array.data[2]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431955913762193918, guid: fe4779df25d021847ae5c88879cfd8a6, type: 3}
+      propertyPath: _listMilestone.Array.data[3]
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4431955913762193919, guid: fe4779df25d021847ae5c88879cfd8a6, type: 3}
       propertyPath: m_Name
       value: MatchHistoryData
