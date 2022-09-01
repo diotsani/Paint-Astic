@@ -1,3 +1,4 @@
+using PaintAstic.Global.Config;
 using PaintAstic.Module.Message;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,13 +49,13 @@ namespace PaintAstic.Global.MatchHistory
             bool isDraw = winMessage.isDraw;
             if (isDraw)
             {
-                for (int i = 0; i < _playerDatas.Length; i++)
+                for (int i = 0; i < ConfigData.configInstance.playerNumbers; i++)
                 {
                     _playerDatas[i].exp += 50;
                 }
                 return;
             }
-            for (int i = 0; i < _playerDatas.Length; i++)
+            for (int i = 0; i < ConfigData.configInstance.playerNumbers; i++)
             {
                 if (i == winIndex)
                 {
@@ -65,7 +66,7 @@ namespace PaintAstic.Global.MatchHistory
                     _playerDatas[i].exp += 50;
                 }
             }
-            for (int i = 0; i < _playerDatas.Length; i++)
+            for (int i = 0; i < ConfigData.configInstance.playerNumbers; i++)
             {
                 if (_playerDatas[i].exp >= 500)
                 {
