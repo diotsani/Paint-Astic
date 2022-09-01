@@ -1,5 +1,4 @@
 using PaintAstic.Module.Message;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,7 +91,42 @@ namespace PaintAstic.Global.MatchHistory
                         }
                         _winCount[i] = 0;
                     }
+                    Debug.Log("win count player " + _playerDatas[i].winCount);                                                                
                 }
+                for (int i = 0; i < _playerDatas.Length; i++)
+                {
+                    if (_playerDatas[i].winCount != 0)
+                    {
+                        _playerDatas[i].exp += _playerDatas[i].winCount * 100;
+                        for (int j = 0; j < _playerDatas.Length; j++)
+                        {
+                            if (j != i)
+                            {
+                                _playerDatas[j].exp += _playerDatas[i].winCount * 50;
+                            }
+                        }
+                        _playerDatas[i].availableColor = 6;
+                        foreach (int milestone in _listMilestone)
+                        {
+                            if (_playerDatas[i].winCount >= milestone)
+                            {
+                                _playerDatas[i].availableColor += 1;
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < _playerDatas.Length; i++)
+                {
+                    if (_playerDatas[i].availableColor == 0)
+                    {
+                        _playerDatas[i].availableColor = 6;
+                    }
+                }
+                Debug.Log(_playerDatas[0].exp);
+                Debug.Log(_playerDatas[1].exp);
+                Debug.Log(_playerDatas[2].exp);
+                Debug.Log(_playerDatas[3].exp);
+                
             }
             else
             {
