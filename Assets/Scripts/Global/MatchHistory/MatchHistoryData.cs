@@ -12,8 +12,10 @@ namespace PaintAstic.Global.MatchHistory
         private const string _prefsKey = "MatchHistoryData";
 
         [SerializeField] private int[] _winCount = { 0, 0, 0, 0 };
+        [SerializeField] private PlayerData[] _playerDatas; 
 
         public int[] winCount => _winCount;
+        public PlayerData[] playerDatas => _playerDatas;
 
         private void Awake()
         {
@@ -73,6 +75,5 @@ namespace PaintAstic.Global.MatchHistory
             }
         }
     }
-
 }
 
