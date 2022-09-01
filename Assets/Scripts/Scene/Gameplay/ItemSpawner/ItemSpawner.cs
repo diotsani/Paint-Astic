@@ -63,11 +63,13 @@ namespace PaintAstic.Scene.Gameplay.ItemSpawner
 
         private void SpawnRandomItem()
         {
-            int random = Random.Range(0, 2);
+            int random = Random.Range(0, 4);
             switch (random)
             {
                 case 0: SpawnCollectPoint(); break;
-                case 1: SpawnBombItem(); break;
+                case 1: SpawnCollectPoint(); break;
+                case 2: SpawnCollectPoint(); break;
+                case 3: SpawnBombItem(); break;
             }
         }
 

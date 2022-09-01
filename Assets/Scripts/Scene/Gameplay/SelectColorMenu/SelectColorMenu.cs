@@ -41,7 +41,8 @@ namespace PaintAstic.Module.Colors
                 _avaliableColorIndex[i] = MatchHistoryData.historyInstance.playerDatas[i].availableColor;
                 
 
-                _textMilestone[i].text = "Total win: " + MatchHistoryData.historyInstance.playerDatas[i].winCount.ToString();
+                _textMilestone[i].text = "Exp: " + MatchHistoryData.historyInstance.playerDatas[i].exp.ToString()
+                    +"\nLevel: " + MatchHistoryData.historyInstance.playerDatas[i].level.ToString();
             }
         }
 
