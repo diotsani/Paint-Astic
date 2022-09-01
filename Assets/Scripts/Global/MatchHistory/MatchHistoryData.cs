@@ -1,5 +1,4 @@
 using PaintAstic.Module.Message;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,18 +48,36 @@ namespace PaintAstic.Global.MatchHistory
             bool isDraw = winMessage.isDraw;
             if (isDraw)
             {
+                for (int i = 0; i < _playerDatas.Length; i++)
+                {
+                    _playerDatas[i].exp += 50;
+                }
                 return;
             }
-            _playerDatas[winIndex].winCount++;
-            foreach (int milestone in _listMilestone)
+            for (int i = 0; i < _playerDatas.Length; i++)
             {
-                if (_playerDatas[winIndex].winCount == milestone)
+                if (i == winIndex)
                 {
-                    _playerDatas[winIndex].availableColor += 1;
+                    _playerDatas[i].exp += 100;
+                }
+                else
+                {
+                    _playerDatas[i].exp += 50;
+                }
+            }
+            for (int i = 0; i < _playerDatas.Length; i++)
+            {
+                if (_playerDatas[i].exp >= 500)
+                {
+                    _playerDatas[i].level++;
+                    _playerDatas[i].exp -= 500;
+                    if (_playerDatas[i].level % 2 == 0)
+                    {
+                        _playerDatas[i].availableColor += 1;
+                    }
                 }
             }
 
-            Debug.Log("win count player " + _playerDatas[winIndex].winCount);
             Save();
         }
 
@@ -92,7 +109,48 @@ namespace PaintAstic.Global.MatchHistory
                         }
                         _winCount[i] = 0;
                     }
+                    Debug.Log("win count player " + _playerDatas[i].winCount);
                 }
+                for (int i = 0; i < _playerDatas.Length; i++)
+                {
+                    if (_playerDatas[i].winCount != 0)
+                    {
+                        _playerDatas[i].exp += _playerDatas[i].winCount * 100;
+                        for (int j = 0; j < _playerDatas.Length; j++)
+                        {
+                            if (j != i)
+                            {
+                                _playerDatas[j].exp += _playerDatas[i].winCount * 50;
+                            }
+                        }
+                        _playerDatas[i].availableColor = 6;
+                        foreach (int milestone in _listMilestone)
+                        {
+                            if (_playerDatas[i].winCount >= milestone)
+                            {
+                                _playerDatas[i].availableColor += 1;
+                            }
+                        }
+                        _playerDatas[i].winCount = 0;
+                    }
+                }
+                for (int i = 0; i < _playerDatas.Length; i++)
+                {
+                    if (_playerDatas[i].availableColor == 0)
+                    {
+                        _playerDatas[i].availableColor = 6;
+                    }
+                }
+                for (int i = 0; i < _playerDatas.Length; i++)
+                {
+                    while (_playerDatas[i].exp / 500 > 0)
+                    {
+                        _playerDatas[i].level++;
+                        _playerDatas[i].exp -= 500;
+                    }
+                }
+
+
             }
             else
             {
