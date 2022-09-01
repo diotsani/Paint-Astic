@@ -14,7 +14,6 @@ namespace PaintAstic.Module.Colors
     {
         [SerializeField] private PlayerSpawner _spawnPlayer;
         [SerializeField] private List<Color> _listColors;
-        [SerializeField] private List<int> _listMilestone = new List<int>();
         [SerializeField] private Image[] _colorImage;
         [SerializeField] private TextMeshProUGUI[] _textMilestone;
         [SerializeField] private int[] _currentColor = { 0, 1, 2, 3 };
@@ -39,15 +38,10 @@ namespace PaintAstic.Module.Colors
             _playerNumber = ConfigData.configInstance.playerNumbers;
             for (int i = 0; i < _spawnPlayer.maxPlayer; i++)
             {
-                foreach (int milestone in _listMilestone)
-                {
-                    if (MatchHistoryData.historyInstance.winCount[i] > milestone)
-                    {
-                        _avaliableColorIndex[i] += 1;
-                    }
-                }
+                _avaliableColorIndex[i] = MatchHistoryData.historyInstance.playerDatas[i].availableColor;
+                
 
-                _textMilestone[i].text = "Total win: " + MatchHistoryData.historyInstance.winCount[i].ToString();
+                _textMilestone[i].text = "Total win: " + MatchHistoryData.historyInstance.playerDatas[i].winCount.ToString();
             }
         }
 
