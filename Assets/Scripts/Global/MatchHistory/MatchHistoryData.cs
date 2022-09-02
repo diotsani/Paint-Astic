@@ -14,8 +14,10 @@ namespace PaintAstic.Global.MatchHistory
         [SerializeField] private int[] _winCount = { 0, 0, 0, 0 };
         [SerializeField] private PlayerData[] _playerDatas;
         [SerializeField] private List<int> _listMilestone = new List<int>();
+        [SerializeField] private int _lastWinner;
 
         public int[] winCount => _winCount;
+        public int lastWinner => _lastWinner;
         public PlayerData[] playerDatas => _playerDatas;
 
         private void Awake()
@@ -78,7 +80,7 @@ namespace PaintAstic.Global.MatchHistory
                     }
                 }
             }
-
+            _lastWinner = winIndex + 1;
             Save();
         }
 

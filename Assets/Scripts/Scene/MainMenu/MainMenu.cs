@@ -9,9 +9,11 @@ namespace PaintAstic.Scene.MainMenu
     public class MainMenu : MonoBehaviour, IButtonAble
     {
         [SerializeField] private Button _playButton;
+        [SerializeField] private Button _historyButton;
         [SerializeField] private Button _SettingButton;
         [SerializeField] private Button _ExitButton;
         [SerializeField] private GameObject _playerPage;
+        [SerializeField] private GameObject _historyPage;
         [SerializeField] private GameObject _settingPage;
         [SerializeField] private GameObject _menuPage;
 
@@ -21,6 +23,7 @@ namespace PaintAstic.Scene.MainMenu
         }
         
         private void SetPlayButtonListener(UnityAction listener) => SetButtonListener(_playButton, listener);
+        private void SetHistoryButtonListener(UnityAction listener) => SetButtonListener(_historyButton, listener);
         private void SetSettingButtonListener(UnityAction listener) => SetButtonListener(_SettingButton, listener);
         private void SetExitButtonListener(UnityAction listener) => SetButtonListener(_ExitButton, listener);
 
@@ -34,6 +37,11 @@ namespace PaintAstic.Scene.MainMenu
         {
             _playerPage.SetActive(true);
             
+        }
+
+        private void OnClickHistoryButton()
+        {
+            _historyPage.SetActive(true);
         }
 
         private void OnClickSettingButton()
@@ -50,6 +58,7 @@ namespace PaintAstic.Scene.MainMenu
         public void SetAllButtonListener()
         {
             SetPlayButtonListener(OnClickPlayButton);
+            SetHistoryButtonListener(OnClickHistoryButton);
             SetSettingButtonListener(OnClickSettingButton);
             SetExitButtonListener(OnClickExitButton);
         }
