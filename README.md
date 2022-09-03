@@ -1,4 +1,4 @@
-# Kelompok5-Tugas5
+# Paint Astic Kelompok 5 Tugas 5
 
 - Abdullah
 - Muhamad Faisal
