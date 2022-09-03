@@ -9,6 +9,7 @@ namespace PaintAstic.Module.Player
     {
         [SerializeField] private PlayingGrid _gridManager;
         [SerializeField] private MeshRenderer _mesh;
+        [SerializeField] private SkinnedMeshRenderer mat;
 
         private float _smoothSpeed = 1;
         private float _intervalMove = 0.3f;
@@ -102,6 +103,11 @@ namespace PaintAstic.Module.Player
         public void ChangePlayerColor(Color color)
         {
             _mesh.material.color = color;
+            for (int i = 0; i < 2; i++)
+            {
+                //mat.materials[i].color = color;
+            }
+            
         }
 
         public void ResetLastCollectPoint()
